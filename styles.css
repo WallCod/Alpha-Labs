@@ -1,0 +1,22 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #b4b0b0; /* Cor de fundo da página */
+}
+.container {
+    text-align: center;
+   
+}
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+.message {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
