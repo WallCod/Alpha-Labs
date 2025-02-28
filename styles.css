@@ -1,22 +1,1609 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
 
 body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Cabeçalho */
+header {
+    background: linear-gradient(45deg, #679ce3, #2c5282);
+    color: white;
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-height: 120px;
+    overflow: hidden;
+}
+
+header .container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.logo img {
+    width: 120px;
+    height: 108px;
+    object-fit: contain;
+    transition: transform 0.3s;
+    position: relative;
+    right: 100px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    position: relative;
+    top: -5px;
+    color: #ebf7f8;
+    font-family:  'monospace';
+    right: 100px;
+    
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #ffeb3b;
+    transform: translateY(-2px);
+}
+
+#themeToggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+    transition: transform 0.3s;
+}
+
+#themeToggle:hover {
+    transform: scale(1.2);
+}
+
+/* Responsividade do Cabeçalho */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+        flex-direction: column;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .logo {
+        gap: 5px;
+    }
+
+    .logo img {
+        width: 100px;
+        height: 90px;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links li {
+        margin: 10px 0; /* Reduz o espaço entre os links em telas muito pequenas */
+    }
+
+    #themeToggle {
+        font-size: 1.2rem; /* Reduz o tamanho do ícone de tema em telas menores */
+    }
+}
+
+@media (min-width: 1200px) {
+    header .container {
+        padding: 0 40px; /* Aumenta o padding em telas grandes */
+    }
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(45deg, rgba(103, 156, 227, 0.7), rgba(44, 82, 130, 0.7)), url('./img/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    padding: 150px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 2s ease-in-out;
+}
+
+.hero button#demoBtn {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #ffeb3b, #ffd700);
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+}
+
+.hero button#demoBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+.result {
+    margin-top: 20px;
+    font-weight: 500;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Responsividade do Hero */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 20px;
+    }
+
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .hero button#demoBtn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 80px 15px; /* Reduz ainda mais o padding em telas muito pequenas */
+    }
+
+    .hero h2 {
+        font-size: 1.8rem; /* Reduz o tamanho do título em telas muito pequenas */
+    }
+
+    .hero p {
+        font-size: 0.9rem; /* Reduz o tamanho do parágrafo em telas muito pequenas */
+    }
+
+    .hero button#demoBtn {
+        padding: 10px 20px; /* Reduz o tamanho do botão em telas muito pequenas */
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hero p {
+        max-width: 600px; /* Reduz o max-width em tablets */
+    }
+}
+
+/* Modal para Agendamento */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #fdfdfd; /* Cor de fundo da página */
 }
-.container {
+
+.modal-content {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+    margin: 20px 0;
+}
+
+body.dark .modal-content {
+    background: #333;
+    color: #f1f1f1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #1a73e8;
+}
+
+body.dark .close-btn {
+    color: #a0aec0;
+}
+
+body.dark .close-btn:hover {
+    color: #679ce3;
+}
+
+.modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #1a73e8;
     text-align: center;
-   
 }
-.logo {
-    max-width: 100%;
-    height: auto;
+
+body.dark .modal h2 {
+    color: #679ce3;
 }
-.message {
-    font-size: 1.5em;
+
+.form-group {
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
     margin-bottom: 5px;
+    color: #333;
+}
+
+body.dark .form-group label {
+    color: #f1f1f1;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #fff;
+    color: #333;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+body.dark .form-group input, body.dark .form-group textarea {
+    background: #444;
+    border-color: #666;
+    color: #f1f1f1;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #ffeb3b;
+    outline: none;
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.modal button[type="submit"] {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ffeb3b, #ffd700);
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+    width: 100%;
+    margin-top: 10px;
+}
+
+.modal button[type="submit"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+/* Responsividade do Modal */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 85%;
+        max-width: 350px;
+        padding: 10px;
+    }
+
+    .modal h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 8px;
+    }
+
+    .form-group input, .form-group textarea {
+        padding: 6px;
+        font-size: 0.8rem;
+    }
+
+    .modal button[type="submit"] {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 90%; /* Aumenta o width em telas muito pequenas para evitar corte */
+        padding: 10px;
+        max-width: 300px; /* Reduz o max-width para telas muito pequenas */
+    }
+
+    .modal h2 {
+        font-size: 1.2rem; /* Reduz o tamanho do título em telas muito pequenas */
+    }
+
+    .form-group input, .form-group textarea {
+        padding: 5px; /* Reduz o padding dos campos em telas muito pequenas */
+        font-size: 0.7rem; /* Reduz o tamanho da fonte dos campos */
+    }
+
+    .modal button[type="submit"] {
+        padding: 6px 12px; /* Reduz o botão em telas muito pequenas */
+        font-size: 0.7rem;
+    }
+}
+
+/* Pop-up de Sucesso (para ambos os formulários) */
+.popup {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fundo escuro translúcido */
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Acima do modal e outros elementos */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.popup-content {
+    background: linear-gradient(135deg, #679ce3, #2c5282); /* Mesma paleta do footer e header */
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+}
+
+.popup-content p {
+    margin: 0 0 15px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ffeb3b, #ffd700); /* Mesmo estilo dos botões do site */
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+}
+
+.popup-content button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+.hidden {
+    display: none; /* Classe pra esconder o pop-up */
+}
+
+/* Responsividade do Pop-up */
+@media (max-width: 768px) {
+    .popup-content {
+        max-width: 350px;
+        width: 85%;
+        padding: 20px;
+    }
+
+    .popup-content p {
+        font-size: 1rem;
+    }
+
+    .popup-content button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup-content {
+        padding: 15px;
+        max-width: 300px;
+        width: 90%;
+    }
+
+    .popup-content p {
+        font-size: 0.9rem;
+    }
+
+    .popup-content button {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Chatbot */
+.chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.chatbot-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #1a73e8, #2c5282);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+.chatbot-icon:hover {
+    transform: scale(1.1);
+}
+
+.chatbot-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.chatbot-content {
+    width: 300px;
+    background: #bdc6dd; /* Fundo branco, como na imagem */
+    border: 2px solid #e5e7eb; /* Borda clara, cinza leve */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1001;
+}
+
+body.dark .chatbot-content {
+    background: #2d3748; /* Cinza escuro no modo escuro, consistente com o site */
+    border-color: #4a5568; /* Borda mais escura no modo escuro */
+}
+
+.chatbot-content.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.chat-output {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f6f7f8; /* Fundo branco para mensagens */
+    border-radius: 5px;
+    border: 1px solid #e5e7eb; /* Borda clara para o chat-output */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
+}
+
+body.dark .chat-output {
+    background-color: #2d3748; /* Cinza escuro no modo escuro */
+    border-color: #4a5568; /* Borda mais escura no modo escuro */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.chat-message.user {
+    background-color: #e3f2fd; /* Azul claro para mensagens do usuário, visível */
+    border: 1px solid #00CED1; /* Borda ciano para o usuário, consistente com o site */
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 5px 0;
+    text-align: right;
+    color: #000000; /* Texto preto para visibilidade */
+    animation: slideInRight 0.5s ease-out;
+}
+
+.chat-message.bot {
+    background-color: #ffffff; /* Fundo branco para o bot, como na imagem */
+    border: 1px solid #adb6c9; /* Borda clara para o bot */
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 5px 0;
+    text-align: left;
+    color: #333333; /* Texto cinza escuro para contraste */
+    animation: slideInLeft 0.5s ease-out;
+}
+
+body.dark .chat-message.user {
+    background-color: #4a5568; /* Cinza escuro no modo escuro para usuário */
+    border-color: #00CED1; /* Mantém a borda ciano */
+    color: #ffffff; /* Texto branco no modo escuro */
+}
+
+body.dark .chat-message.bot {
+    background-color: #2d3748; /* Cinza mais escuro no modo escuro para bot */
+    border-color: #4a5568; /* Borda mais escura no modo escuro */
+    color: #ffffff; /* Texto branco no modo escuro */
+}
+
+.chatbot input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.chatbot input:focus {
+    border-color: #00CED1; /* Ciano, consistente com o título Alpha Labs */
+    box-shadow: 0 0 5px rgba(0, 206, 209, 0.5);
+    outline: none;
+}
+
+/* Animações para mensagens */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsividade do Chatbot */
+@media (max-width: 768px) {
+    .chatbot-content {
+        width: 90%;
+        right: 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot {
+        bottom: 10px; /* Reduz a margem inferior em telas muito pequenas */
+        right: 10px;
+    }
+
+    .chatbot-icon {
+        width: 50px; /* Reduz o tamanho do ícone em telas muito pequenas */
+        height: 50px;
+    }
+
+    .chatbot-icon img {
+        width: 30px; /* Reduz o tamanho da imagem dentro do ícone */
+        height: 30px;
+    }
+
+    .chatbot-content {
+        width: 80%; /* Reduz a largura do conteúdo em telas muito pequenas */
+        right: 5%;
+        padding: 10px; /* Reduz o padding */
+    }
+
+    .chat-output {
+        height: 150px; /* Reduz a altura do chat output em telas muito pequenas */
+    }
+
+    .chatbot input {
+        padding: 8px; /* Reduz o padding do input em telas muito pequenas */
+        font-size: 0.9rem; /* Reduz o tamanho da fonte do input */
+    }
+}
+
+@media (min-width: 1200px) {
+    .chatbot {
+        bottom: 30px; /* Aumenta a margem inferior em telas grandes */
+        right: 30px;
+    }
+}
+
+/* Serviços */
+#servicos {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f9f9f9, #e5e7eb);
+    position: relative;
+}
+
+body.dark #servicos {
+    background: linear-gradient(135deg, #222, #333);
+}
+
+#servicos h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #1a73e8;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.service {
+    background: linear-gradient(135deg, #fff, #f5f5f5);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    transition: transform 0.4s, box-shadow 0.4s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+body.dark .service {
+    background: linear-gradient(135deg, #333, #444);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(26, 115, 232, 0.2);
+}
+
+.service img {
+    max-width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.service:hover img {
+    transform: scale(1.05);
+}
+
+.service h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #2c5282;
+    transition: color 0.3s;
+}
+
+body.dark .service h3 {
+    color: #a0aec0;
+}
+
+.service:hover h3 {
+    color: #1a73e8;
+}
+
+.service p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+body.dark .service p {
+    color: #a0aec0;
+}
+
+/* Responsividade dos Serviços */
+@media (max-width: 768px) {
+    #servicos {
+        padding: 60px 15px; /* Reduz o padding em telas menores */
+    }
+
+    #servicos h2 {
+        font-size: 2rem; /* Reduz o tamanho do título em telas menores */
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .service {
+        height: 150px; /* Reduz a altura dos serviços em telas menores */
+        padding: 10px;
+    }
+
+    .service img {
+        max-width: 60px; /* Reduz o tamanho das imagens em telas menores */
+        height: 60px;
+    }
+
+    .service h3 {
+        font-size: 1rem; /* Reduz o tamanho do título dos serviços */
+    }
+
+    .service p {
+        font-size: 0.8rem; /* Reduz o tamanho do parágrafo dos serviços */
+    }
+}
+
+@media (max-width: 480px) {
+    #servicos {
+        padding: 60px 15px; /* Reduz o padding em telas muito pequenas */
+    }
+
+    #servicos h2 {
+        font-size: 1.8rem; /* Reduz mais o título em telas muito pequenas */
+    }
+
+    .service {
+        height: 120px; /* Reduz ainda mais a altura dos serviços em telas muito pequenas */
+        padding: 8px; /* Reduz o padding dos serviços */
+    }
+
+    .service img {
+        max-width: 50px; /* Reduz mais o tamanho das imagens em telas muito pequenas */
+        height: 50px;
+    }
+
+    .service h3 {
+        font-size: 0.9rem; /* Reduz mais o título dos serviços */
+    }
+
+    .service p {
+        font-size: 0.7rem; /* Reduz mais o parágrafo dos serviços */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .services-grid {
+        gap: 10px; /* Reduz o gap entre os serviços em tablets */
+    }
+}
+
+/* Depoimentos */
+.testimonials {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #e5e7eb, #f9f9f9);
+    position: relative;
+}
+
+body.dark .testimonials {
+    background: linear-gradient(135deg, #333, #444);
+}
+
+.testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #1a73e8;
+}
+
+.owl-carousel {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.testimonial-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark .testimonial-item {
+    background: #333;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(26, 115, 232, 0.3);
+}
+
+.testimonial-item p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+body.dark .testimonial-item p {
+    color: #a0aec0;
+}
+
+.testimonial-item h4 {
+    font-size: 1rem;
+    color: #2c5282;
+    font-weight: 600;
+    margin: 0;
+}
+
+body.dark .testimonial-item h4 {
+    color: #a0aec0;
+}
+
+/* Estilos para as fotos dos clientes */
+.owl-carousel .testimonial-item .client-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Preenche o círculo sem distorcer */
+    margin-right: 10px; /* Espaço entre a foto e o nome */
+    display: block; /* Garante que a imagem se comporte corretamente */
+    -webkit-border-radius: 50%; /* Suporte para navegadores antigos (Safari) */
+    -moz-border-radius: 50%; /* Suporte para navegadores antigos (Firefox) */
+}
+
+/* Container para alinhar a foto e o nome */
+.client-info {
+    display: flex; /* Alinha a foto e o nome horizontalmente */
+    align-items: flex-start; /* Centraliza verticalmente */
+    gap: 10px; /* Espaço opcional entre a foto e o texto, ajustável */
+}
+
+/* Estilo para o modo escuro */
+body.dark .client-photo {
+    border: 2px solid #a0aec0; /* Borda para contraste no modo escuro */
+}
+
+/* Responsividade dos Depoimentos */
+@media (max-width: 768px) {
+    .testimonials {
+        padding: 60px 15px; /* Reduz o padding em telas menores */
+    }
+
+    .testimonials h2 {
+        font-size: 2rem; /* Reduz o tamanho do título em telas menores */
+    }
+
+    .client-photo {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Certifique-se de manter o arredondamento */
+    .owl-carousel .testimonial-item .client-photo {
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 8px; /* Ajuste o margin, se necessário */
+        display: block;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+    }
+
+    .testimonial-item h4 {
+        font-size: 0.9rem; /* Mantém o nome menor em telas menores */
+    }
+
+    .testimonial-item {
+        padding: 20px; /* Reduz o padding dos itens em telas menores */
+        margin: 5px; /* Reduz a margem dos itens */
+    }
+
+    .testimonial-item p {
+        font-size: 0.9rem; /* Reduz o tamanho do texto dos depoimentos */
+    }
+
+    .owl-carousel {
+        max-width: 100%; /* Garante que o carrossel ocupe toda a largura em mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonials {
+        padding: 60px 15px; /* Reduz o padding em telas muito pequenas */
+    }
+
+    .testimonials h2 {
+        font-size: 1.8rem; /* Reduz mais o título em telas muito pequenas */
+    }
+
+    .testimonial-item {
+        padding: 20px; /* Mantém o padding em telas muito pequenas */
+        margin: 5px;
+    }
+
+    .testimonial-item p {
+        font-size: 0.9rem; /* Mantém o tamanho do texto dos depoimentos */
+    }
+
+    .testimonial-item h4 {
+        font-size: 0.8rem; /* Reduz mais o nome em telas muito pequenas */
+    }
+
+    .client-photo {
+        width: 30px; /* Reduz o tamanho das fotos em telas muito pequenas */
+        height: 30px;
+        margin-right: 5px; /* Reduz o espaçamento da foto */
+    }
+}
+
+@media (max-height: 480px) and (min-width: 768px) {
+    .owl-carousel {
+        max-width: 90%; /* Reduz a largura em modo paisagem */
+    }
+
+    .testimonial-item {
+        padding: 15px; /* Reduz o padding em modo paisagem */
+    }
+}
+
+/* Estatísticas */
+.stats {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #679ce3, #2c5282);
+    color: white;
+    text-align: center;
+}
+
+.stats .container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    width: 200px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.stat-item:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.stat-item p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Responsividade das Estatísticas */
+@media (max-width: 768px) {
+    .stats {
+        padding: 60px 15px; /* Reduz o padding em telas menores */
+    }
+
+    .stats .container {
+        gap: 20px; /* Reduz o gap entre os itens em telas menores */
+    }
+
+    .stat-item {
+        width: 150px; /* Reduz a largura dos itens em telas menores */
+        padding: 20px; /* Reduz o padding dos itens */
+    }
+
+    .stat-item h3 {
+        font-size: 2rem; /* Reduz o tamanho do número em telas menores */
+    }
+
+    .stat-item p {
+        font-size: 1rem; /* Reduz o tamanho do texto em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-item {
+        width: 120px; /* Reduz ainda mais em telas muito pequenas */
+        padding: 15px;
+    }
+
+    .stat-item h3 {
+        font-size: 1.5rem; /* Reduz mais o número em telas muito pequenas */
+    }
+
+    .stat-item p {
+        font-size: 0.9rem; /* Reduz mais o texto em telas muito pequenas */
+    }
+}
+
+@media (min-width: 1200px) {
+    .stats .container {
+        gap: 60px; /* Aumenta o gap em telas grandes */
+    }
+}
+
+/* Sobre */
+#sobre {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f9f9f9, #e5e7eb);
+    position: relative;
+}
+
+body.dark #sobre {
+    background: linear-gradient(135deg, #1a1a1a, #222);
+}
+
+#sobre h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #1a73e8;
+}
+
+#sobre p {
+    font-size: 1.2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+    color: #666;
+}
+
+body.dark #sobre p {
+    color: #a0aec0;
+}
+
+/* Responsividade do Sobre */
+@media (max-width: 768px) {
+    #sobre {
+        padding: 60px 15px; /* Reduz o padding em telas menores */
+    }
+
+    #sobre h2 {
+        font-size: 2rem; /* Reduz o tamanho do título em telas menores */
+    }
+
+    #sobre p {
+        font-size: 1rem; /* Reduz o tamanho do parágrafo em telas menores */
+        max-width: 100%; /* Garante que o texto ocupe toda a largura em mobile */
+        padding: 0 10px; /* Adiciona padding lateral para evitar colar nas bordas */
+    }
+}
+
+@media (max-width: 480px) {
+    #sobre h2 {
+        font-size: 1.5rem; /* Reduz mais o título em telas muito pequenas */
+    }
+
+    #sobre p {
+        font-size: 0.9rem; /* Reduz mais o parágrafo em telas muito pequenas */
+    }
+}
+
+/* Contato */
+footer {
+    background: linear-gradient(135deg, #4299e1, #2d3748); /* Gradiente azul claro/escuro, como na imagem */
+    color: white;
+    padding: 80px 20px 20px; /* Reduz o padding inferior para 20px, afinando o espaço abaixo */
+    text-align: center;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between; /* Divide o espaço entre as colunas */
+    align-items: stretch; /* Alinha as colunas para terem a mesma altura */
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px; /* Espaço entre as colunas */
+}
+
+.footer-left {
+    background: #4a5568; /* Cinza escuro, como na imagem */
+    padding: 20px;
+    border-radius: 10px; /* Bordas arredondadas, como na imagem */
+    width: 100%;
+    max-width: 600px; /* Mantém a largura máxima para o .footer-left */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve, como na imagem */
+    text-align: left;
+    display: flex;
+    flex-direction: column; /* Posiciona elementos verticalmente */
+    justify-content: space-between; /* Distribui espaço entre topo (parceiros) e inferior (redes/info) */
+}
+
+.partners-title {
+    font-size: 1.5rem; /* Tamanho do título, como na imagem */
+    margin-bottom: 20px; /* Espaço entre o título e as colunas de parceiros */
+    color: white;
+    text-align: center; /* Centraliza o título "Parceiros" */
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1.6fr 0.6fr; /* Ajusta as colunas para mover a segunda e terceira lista mais para a direita */
+    gap: 20px; /* Espaço entre as colunas */
+    margin-bottom: 20px; /* Espaço entre as colunas de parceiros e as redes sociais */
+    align-items: start; /* Alinha os itens no topo */
+}
+
+.partners-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.partners-list li {
+    margin-bottom: 10px;
+}
+
+.partners-list a {
+    color: #e2e8f0; /* Tom de cor claro para os parceiros, como na imagem */
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1rem; /* Tamanho do texto, ajustado para a imagem */
+}
+
+.partners-list a:hover {
+    color: #ffeb3b; /* Cor de destaque ao passar o mouse, como na imagem */
+}
+
+.footer-bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza redes sociais e .footer-info */
+    gap: 20px; /* Espaço entre redes sociais e .footer-info */
+}
+
+.social-icons {
+    text-align: center; /* Centraliza os ícones de redes sociais */
+    margin-bottom: 0; /* Remove margem inferior para manter no topo */
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-left: 15px; /* Espaço entre os ícones, como na imagem */
+    color: white;
+    font-size: 2rem; /* Tamanho maior dos ícones, como na imagem */
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover {
+    color: #ffeb3b; /* Cor de destaque ao passar o mouse */
+    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+.footer-info {
+    text-align: center; /* Centraliza o conteúdo na parte inferior */
+    font-size: 0.9rem; /* Tamanho do texto, como na imagem */
+    color: white;
+}
+
+.footer-info a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.footer-info a:hover {
+    color: #ffeb3b;
+    text-decoration: underline;
+}
+
+.footer-info p {
+    margin: 5px 0; /* Espaçamento entre os parágrafos */
+}
+
+.footer-right {
+    background: linear-gradient(135deg, #4299e1, #2d3748); /* Gradiente azul, como na imagem */
+    padding: 20px;
+    border-radius: 10px; /* Bordas arredondadas, como na imagem */
+    flex: 1; /* Mantém o formulário ocupando mais espaço, igual ao .footer-left */
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve, como na imagem */
+    min-width: 400px; /* Garante um tamanho mínimo para o formulário, ajustável */
+}
+
+footer h2 {
+    font-size: 2rem; /* Mantém o tamanho padrão para o título do formulário */
+    margin-bottom: 20px;
+    color: white;
+    text-align: center; /* Centraliza o título "Entre em Contato" */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+    max-width: 100%; /* Mantém o formulário ajustado, mas agora com mais espaço */
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 12px; /* Mantém o padding maior para melhor visibilidade */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem; /* Mantém o tamanho da fonte para melhor legibilidade */
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #ffeb3b;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+form textarea {
+    height: 120px; /* Mantém a altura maior para melhor usabilidade */
+    resize: vertical;
+}
+
+form button {
+    padding: 14px 30px; /* Mantém o padding maior para maior destaque */
+    background: linear-gradient(45deg, #ffeb3b, #ffd700); /* Botão amarelo, como na imagem */
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem; /* Mantém o tamanho da fonte do botão */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+    width: 100%;
+    margin-top: 10px;
+}
+
+form button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+/* Estilo para o parágrafo "Powered By" */
+.powered {
+    margin-top: 20px; /* Mantém a distância em relação às caixas (footer-content) */
+    font-size: 0.9rem; /* Tamanho do texto, consistente com .footer-info */
+    color: white;
+    text-align: center; /* Centraliza o texto */
+}
+
+.powered a {
+    color: #ffeb3b; /* Cor destacada para o link, como os botões */
+    text-decoration: none; /* Remove sublinhado padrão */
+    transition: color 0.3s; /* Transição suave para o hover */
+}
+
+.powered a:hover {
+    color: #ffd700; /* Cor mais clara no hover para destacar */
+    text-decoration: underline; /* Adiciona sublinhado no hover para indicar link */
+}
+
+/* Botão Voltar ao Topo */
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #1a73e8, #2c5282);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#backToTop.visible {
+    opacity: 1;
+}
+
+#backToTop:hover {
+    transform: scale(1.1);
+}
+
+/* Estilização personalizada para o banner de cookies */
+.cc-window {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cc-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cc-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 235, 59, 0.5);
+}
+
+/* Responsividade do Botão Voltar ao Topo */
+@media (max-width: 768px) {
+    #backToTop {
+        bottom: 60px;
+        left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #backToTop {
+        width: 40px; /* Reduz o tamanho do botão em telas muito pequenas */
+        height: 40px;
+        bottom: 10px; /* Reduz a margem inferior em telas muito pequenas */
+        left: 10px;
+        font-size: 1.2rem; /* Reduz o tamanho da fonte em telas muito pequenas */
+    }
+}
+
+@media (max-height: 480px) and (min-width: 768px) {
+    #backToTop {
+        bottom: 20px; /* Mantém a margem inferior em modo paisagem */
+        left: 20px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade Geral (Retina Displays) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .logo img, .service img, .client-photo {
+        image-rendering: -webkit-optimize-contrast; /* Melhora a renderização em telas Retina */
+    }
+}
+
+/* Responsividade do Contato */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Empilha as colunas em telas menores */
+        gap: 20px;
+    }
+
+    .footer-left, .footer-right {
+        flex: 1; /* Ambas as colunas ocupam o mesmo espaço em mobile */
+        padding: 15px;
+        max-width: 100%; /* Garante que ocupem toda a largura em mobile */
+    }
+
+    .partners-grid {
+        grid-template-columns: 1fr; /* Empilha as colunas em uma única coluna em mobile */
+        gap: 15px;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .social-icons {
+        text-align: center; /* Centraliza os ícones em mobile */
+    }
+
+    footer h2 {
+        font-size: 1.5rem;
+    }
+
+    .partners-title {
+        font-size: 1.2rem; /* Diminui o título em mobile */
+    }
+
+    .partners-list a {
+        font-size: 0.9rem; /* Ajusta o tamanho dos parceiros em mobile */
+    }
+
+    .social-icons a {
+        font-size: 1.5rem; /* Ajusta o tamanho dos ícones em mobile */
+        margin-left: 12px; /* Reduz o espaço entre os ícones em mobile */
+    }
+
+    .footer-info {
+        font-size: 0.8rem; /* Ajusta o tamanho do texto em mobile */
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    form input, form textarea {
+        padding: 8px;
+        font-size: 0.9rem; /* Ajusta a fonte em mobile */
+    }
+
+    form button {
+        padding: 10px 20px;
+        font-size: 0.9rem; /* Ajusta o botão em mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .partners-grid {
+        gap: 15px; /* Mantém o gap em telas muito pequenas */
+    }
+
+    .partners-list a {
+        font-size: 0.9rem; /* Mantém o tamanho dos parceiros em telas muito pequenas */
+    }
+
+    .social-icons a {
+        font-size: 1.5rem; /* Mantém o tamanho dos ícones em telas muito pequenas */
+        margin-left: 10px; /* Reduz mais o espaço entre os ícones em telas muito pequenas */
+    }
+
+    .footer-info {
+        font-size: 0.8rem; /* Mantém o tamanho do texto em telas muito pequenas */
+    }
+}
+
+@media (max-height: 480px) and (min-width: 768px) {
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr); /* Divide em 2 colunas em modo paisagem */
+        gap: 15px; /* Reduz o gap em modo paisagem */
+    }
+
+    .footer-bottom-content {
+        flex-direction: row; /* Alinha redes sociais e .footer-info horizontalmente em modo paisagem */
+        gap: 15px;
+        align-items: center;
+    }
+
+    .social-icons {
+        text-align: right; /* Alinha redes sociais à direita em modo paisagem */
+    }
+}
+
+@media (min-width: 1200px) {
+    .footer-left {
+        max-width: 700px; /* Aumenta ligeiramente o max-width em telas grandes */
+    }
+
+    .footer-right {
+        min-width: 500px; /* Aumenta o tamanho mínimo do formulário em telas grandes */
+    }
 }
