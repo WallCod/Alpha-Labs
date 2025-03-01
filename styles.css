@@ -822,16 +822,6 @@ body.dark #chatbot .chat-message.bot {
         padding: 10px !important; /* Mantém o padding, mas ajustado para telas pequenas, com !important */
     }
 
-    #chatbot .chatbot-content::after {
-        content: "Debug: Styled Width = " attr(style) " | Computed Width = " attr(computed-width) " | Parent Width = " attr(parent-width) " | Window Width = " attr(window-width);
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: yellow !important;
-        font-size: 12px !important;
-        background: rgba(0, 0, 0, 0.7) !important;
-        z-index: 10002 !important;
-    }
 
     #chatbot .chat-output {
         height: 200px !important; /* Mantém a altura original para consistência com telas grandes */
@@ -955,25 +945,14 @@ body.dark #chatbot .chat-message.bot {
 /* Depuração Avançada */
 @media (max-width: 768px) {
     #chatbot .chatbot-content {
-        background-color: rgba(255, 0, 0, 0.3) !important; /* Destaca o pop-up para teste */
-        border: 2px solid red !important; /* Adiciona borda para visualizar limites */
+        background-color: rgba(254, 252, 252, 0) !important; /* Destaca o pop-up para teste */
+        border: 2px solid rgb(249, 247, 247) !important; /* Adiciona borda para visualizar limites */
         width: 550px !important; /* Mantém 550px para teste */
         max-width: 95% !important; /* Garante que não ultrapasse a tela */
         min-width: 300px !important; /* Define um mínimo para evitar "fino" extremo */
         right: 2.5% !important;
         bottom: 60px !important;
         padding: 10px !important;
-    }
-
-    #chatbot .chatbot-content::after {
-        content: "Debug: Styled Width = " attr(style) " | Computed Width = " attr(computed-width) " | Parent Width = " attr(parent-width) " | Window Width = " attr(window-width) " | Screen Width = " attr(screen-width);
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: yellow !important;
-        font-size: 12px !important;
-        background: rgba(0, 0, 0, 0.8) !important;
-        z-index: 10003 !important;
     }
 }
 
