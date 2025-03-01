@@ -54,8 +54,216 @@ header .container {
     height: auto;
     object-fit: contain;
     transition: transform 0.3s;
-    position: relative;
-    bottom: 10px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    color: #f8fafa;
+    font-family: 'monospace';
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #ffeb3b;
+    transform: translateY(-2px);
+}
+
+.nav-links li button#themeToggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+    transition: transform 0.3s;
+}
+
+.nav-links li button#themeToggle:hover {
+    transform: scale(1.2);
+}
+
+/* Responsividade do Cabeçalho */
+@media (max-width: 1024px) {
+    header .container {
+        padding: 0 15px;
+    }
+
+    .logo img {
+        max-width: 100px;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .nav-links li {
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+
+    .logo {
+        margin-bottom: 0;
+        justify-content: flex-start;
+    }
+
+    .logo img {
+        max-width: 90px;
+    }
+
+    .logo h1 {
+        font-size: 1.3rem;
+    }
+
+    nav {
+        width: 100%;
+        position: relative;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0;
+        background-color: rgba(44, 82, 130, 0.9);
+        padding: 15px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 101;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a, .nav-links button#themeToggle {
+        display: block;
+        padding: 8px 0;
+        font-size: 1rem; /* Mantém o tamanho consistente com os links */
+    }
+
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: white;
+        padding: 5px;
+        line-height: 1;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .menu-toggle .fas {
+        transition: transform 0.3s;
+    }
+
+    .menu-toggle:hover .fas {
+        transform: scale(1.1);
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem 0;
+    }
+
+    .logo img {
+        max-width: 80px;
+    }
+
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+
+    .nav-links {
+        padding: 10px 0;
+    }
+
+    .nav-links li {
+        margin: 8px 0;
+    }
+
+    .nav-links a, .nav-links button#themeToggle {
+        font-size: 0.9rem; /* Ajuste para telas muito pequenas */
+    }
+
+    .menu-toggle {
+        font-size: 1.3rem;
+        padding: 3px;
+        right: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    header .container {
+        padding: 0 40px;
+    }
+}
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s;
 }
 
 .logo h1 {
@@ -129,13 +337,14 @@ nav {
 
 @media (max-width: 768px) {
     header .container {
-        flex-direction: column;
+        flex-direction: row; /* Alterado de column para manter o layout horizontal */
+        justify-content: space-between; /* Mantém o logo à esquerda e o menu à direita */
         padding: 0 10px;
     }
 
     .logo {
-        margin-bottom: 10px;
-        justify-content: flex-start; /* Mantém o logo alinhado à esquerda */
+        margin-bottom: 0; /* Remove margem inferior para manter alinhamento */
+        justify-content: flex-start; /* Mantém o logo fixo à esquerda */
     }
 
     .logo img {
@@ -155,13 +364,13 @@ nav {
         display: none;
         flex-direction: column;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 0;
         background-color: rgba(44, 82, 130, 0.9);
         padding: 15px 0;
         position: absolute;
         top: 100%;
         left: 0;
-        z-index: 101; /* Garante que fique acima de outros elementos */
+        z-index: 101;
     }
 
     .nav-links.active {
