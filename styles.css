@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'DM Sans', sans-serif;
+    font-family: "DM Sans", sans-serif;
 }
 
 body {
@@ -33,7 +33,8 @@ header {
     z-index: 100;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     max-height: 120px;
-    overflow: visible; /* Garante que o menu não seja cortado */
+    overflow: visible;
+    /* Garante que o menu não seja cortado */
 }
 
 header .container {
@@ -65,7 +66,7 @@ header .container {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     margin-top: 5px;
     color: #f8fafa;
-    font-family: 'monospace';
+    font-family: "monospace";
     position: relative;
     bottom: 8px;
     right: 50px;
@@ -93,7 +94,8 @@ nav {
     transition: color 0.3s, transform 0.3s;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
     color: #ffeb3b;
     transform: translateY(-2px);
 }
@@ -180,8 +182,10 @@ nav {
         left: 0;
         z-index: 101;
         list-style: none;
-        text-align: center; /* Centraliza todo o conteúdo do menu */
-        justify-content: center; /* Centraliza verticalmente os itens (opcional, para ajuste fino) */
+        text-align: center;
+        /* Centraliza todo o conteúdo do menu */
+        justify-content: center;
+        /* Centraliza verticalmente os itens (opcional, para ajuste fino) */
     }
 
     .nav-links.active {
@@ -191,23 +195,28 @@ nav {
     .nav-links li {
         margin: 10px 0;
         width: 100%;
-        text-align: center; /* Centraliza cada item individualmente */
+        text-align: center;
+        /* Centraliza cada item individualmente */
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
 
-    .nav-links a, .nav-links button#themeToggle {
+    .nav-links a,
+    .nav-links button#themeToggle {
         display: block;
         padding: 8px 0;
         font-size: 1rem;
         color: white;
         text-decoration: none;
-        text-align: center; /* Centraliza os links e o botão */
-        margin: 0 auto; /* Centraliza horizontalmente o conteúdo dentro do <li> */
+        text-align: center;
+        /* Centraliza os links e o botão */
+        margin: 0 auto;
+        /* Centraliza horizontalmente o conteúdo dentro do <li> */
     }
 
-    .nav-links a:hover, .nav-links button#themeToggle:hover {
+    .nav-links a:hover,
+    .nav-links button#themeToggle:hover {
         color: #ffeb3b;
     }
 
@@ -262,7 +271,8 @@ nav {
         margin: 8px 0;
     }
 
-    .nav-links a, .nav-links button#themeToggle {
+    .nav-links a,
+    .nav-links button#themeToggle {
         font-size: 0.9rem;
     }
 
@@ -287,7 +297,10 @@ nav {
 
 /* Hero */
 .hero {
-    background: linear-gradient(45deg, rgba(103, 156, 227, 0.7), rgba(44, 82, 130, 0.7)), url('./img/hero-background.jpg');
+    background: linear-gradient(45deg,
+            rgba(103, 156, 227, 0.7),
+            rgba(44, 82, 130, 0.7)),
+        url("./img/hero-background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -470,7 +483,8 @@ body.dark .form-group label {
     color: #f1f1f1;
 }
 
-.form-group input, .form-group textarea {
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
@@ -481,13 +495,15 @@ body.dark .form-group label {
     transition: border-color 0.3s, background 0.3s;
 }
 
-body.dark .form-group input, body.dark .form-group textarea {
+body.dark .form-group input,
+body.dark .form-group textarea {
     background: #444;
     border-color: #666;
     color: #f1f1f1;
 }
 
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus,
+.form-group textarea:focus {
     border-color: #ffeb3b;
     outline: none;
 }
@@ -534,7 +550,8 @@ body.dark .form-group input, body.dark .form-group textarea {
         margin-bottom: 8px;
     }
 
-    .form-group input, .form-group textarea {
+    .form-group input,
+    .form-group textarea {
         padding: 6px;
         font-size: 0.8rem;
     }
@@ -556,7 +573,8 @@ body.dark .form-group input, body.dark .form-group textarea {
         font-size: 1.2rem;
     }
 
-    .form-group input, .form-group textarea {
+    .form-group input,
+    .form-group textarea {
         padding: 5px;
         font-size: 0.7rem;
     }
@@ -689,8 +707,10 @@ body.dark .form-group input, body.dark .form-group textarea {
 
 .chatbot-content {
     width: 300px;
-    background: #ffffff; /* Fundo branco, como na imagem */
-    border: 2px solid #e5e7eb; /* Borda clara, cinza leve */
+    background: #ffffff;
+    /* Fundo branco, como na imagem */
+    border: 2px solid #e5e7eb;
+    /* Borda clara, cinza leve */
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     padding: 15px;
@@ -702,8 +722,10 @@ body.dark .form-group input, body.dark .form-group textarea {
 }
 
 body.dark .chatbot-content {
-    background: #2d3748; /* Cinza escuro no modo escuro, consistente com o site */
-    border-color: #4a5568; /* Borda mais escura no modo escuro */
+    background: #2d3748;
+    /* Cinza escuro no modo escuro, consistente com o site */
+    border-color: #4a5568;
+    /* Borda mais escura no modo escuro */
 }
 
 .chatbot-content.hidden {
@@ -717,51 +739,67 @@ body.dark .chatbot-content {
     overflow-y: auto;
     margin-bottom: 15px;
     padding: 10px;
-    background-color: #f6f7f8; /* Fundo branco para mensagens */
+    background-color: #f6f7f8;
+    /* Fundo branco para mensagens */
     border-radius: 5px;
-    border: 1px solid #e5e7eb; /* Borda clara para o chat-output */
+    border: 1px solid #e5e7eb;
+    /* Borda clara para o chat-output */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
     line-height: 1.5;
 }
 
 body.dark .chat-output {
-    background-color: #2d3748; /* Cinza escuro no modo escuro */
-    border-color: #4a5568; /* Borda mais escura no modo escuro */
+    background-color: #2d3748;
+    /* Cinza escuro no modo escuro */
+    border-color: #4a5568;
+    /* Borda mais escura no modo escuro */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .chat-message.user {
-    background-color: #e3f2fd; /* Azul claro para mensagens do usuário, visível */
-    border: 1px solid #00CED1; /* Borda ciano para o usuário, consistente com o site */
+    background-color: #e3f2fd;
+    /* Azul claro para mensagens do usuário, visível */
+    border: 1px solid #00ced1;
+    /* Borda ciano para o usuário, consistente com o site */
     border-radius: 5px;
     padding: 8px 12px;
     margin: 5px 0;
     text-align: right;
-    color: #000000; /* Texto preto para visibilidade */
+    color: #000000;
+    /* Texto preto para visibilidade */
     animation: slideInRight 0.5s ease-out;
 }
 
 .chat-message.bot {
-    background-color: #ffffff; /* Fundo branco para o bot, como na imagem */
-    border: 1px solid #adb6c9; /* Borda clara para o bot */
+    background-color: #ffffff;
+    /* Fundo branco para o bot, como na imagem */
+    border: 1px solid #adb6c9;
+    /* Borda clara para o bot */
     border-radius: 5px;
     padding: 8px 12px;
     margin: 5px 0;
     text-align: left;
-    color: #333333; /* Texto cinza escuro para contraste */
+    color: #333333;
+    /* Texto cinza escuro para contraste */
     animation: slideInLeft 0.5s ease-out;
 }
 
 body.dark .chat-message.user {
-    background-color: #4a5568; /* Cinza escuro no modo escuro para usuário */
-    border-color: #00CED1; /* Mantém a borda ciano */
-    color: #ffffff; /* Texto branco no modo escuro */
+    background-color: #4a5568;
+    /* Cinza escuro no modo escuro para usuário */
+    border-color: #00ced1;
+    /* Mantém a borda ciano */
+    color: #ffffff;
+    /* Texto branco no modo escuro */
 }
 
 body.dark .chat-message.bot {
-    background-color: #2d3748; /* Cinza mais escuro no modo escuro para bot */
-    border-color: #4a5568; /* Borda mais escura no modo escuro */
-    color: #ffffff; /* Texto branco no modo escuro */
+    background-color: #2d3748;
+    /* Cinza mais escuro no modo escuro para bot */
+    border-color: #4a5568;
+    /* Borda mais escura no modo escuro */
+    color: #ffffff;
+    /* Texto branco no modo escuro */
 }
 
 .chatbot input {
@@ -774,7 +812,8 @@ body.dark .chat-message.bot {
 }
 
 .chatbot input:focus {
-    border-color: #00CED1; /* Ciano, consistente com o título Alpha Labs */
+    border-color: #00ced1;
+    /* Ciano, consistente com o título Alpha Labs */
     box-shadow: 0 0 5px rgba(0, 206, 209, 0.5);
     outline: none;
 }
@@ -1410,7 +1449,8 @@ footer {
     flex: 1;
     text-align: left;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    min-width: 0; /* Remove min-width fixo para melhor responsividade */
+    min-width: 0;
+    /* Remove min-width fixo para melhor responsividade */
 }
 
 footer h2 {
@@ -1433,7 +1473,8 @@ form label {
     font-size: 0.9rem;
 }
 
-form input, form textarea {
+form input,
+form textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -1444,7 +1485,8 @@ form input, form textarea {
     transition: border-color 0.3s, background 0.3s;
 }
 
-form input:focus, form textarea:focus {
+form input:focus,
+form textarea:focus {
     border-color: #ffeb3b;
     background: rgba(255, 255, 255, 0.2);
     outline: none;
@@ -1482,7 +1524,8 @@ form button:hover {
         gap: 15px;
     }
 
-    .footer-left, .footer-right {
+    .footer-left,
+    .footer-right {
         width: 100%;
         max-width: none;
         min-width: 0;
@@ -1501,7 +1544,8 @@ form button:hover {
         margin-bottom: 10px;
     }
 
-    form input, form textarea {
+    form input,
+    form textarea {
         padding: 8px;
         font-size: 0.9rem;
     }
@@ -1512,8 +1556,15 @@ form button:hover {
     }
 
     .partners-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
         gap: 15px;
+    }
+
+    /* Oculta a terceira coluna (Parceiro 3, 6, 9) em celulares */
+    .partners-grid> :nth-child(3n),/* Oculta os itens da terceira coluna */
+    .partners-grid> :nth-child(3n-1)~ :nth-child(n) {/* Oculta os itens subsequentes da terceira coluna */
+        display: none !important;
     }
 
     .partners-title {
@@ -1556,7 +1607,8 @@ form button:hover {
         font-size: 0.8rem;
     }
 
-    form input, form textarea {
+    form input,
+    form textarea {
         padding: 6px;
         font-size: 0.7rem;
         border-radius: 6px;
@@ -1572,7 +1624,15 @@ form button:hover {
     }
 
     .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
         gap: 15px;
+    }
+
+     /* Oculta a terceira coluna (Parceiro 3, 6, 9) em celulares */
+     .partners-grid> :nth-child(3n),/* Oculta os itens da terceira coluna */
+     .partners-grid> :nth-child(3n-1)~ :nth-child(n) {/* Oculta os itens subsequentes da terceira coluna */
+        display: none !important;
     }
 
     .partners-list a {
@@ -1611,7 +1671,8 @@ form button:hover {
         font-size: 0.7rem;
     }
 
-    form input, form textarea {
+    form input,
+    form textarea {
         padding: 4px;
         font-size: 0.6rem;
     }
@@ -1629,8 +1690,14 @@ form button:hover {
 @media (max-height: 480px) and (min-width: 768px) {
     .partners-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        text-align: center;
+        gap: 10px;
     }
+ /* Oculta a terceira coluna (Parceiro 3, 6, 9) em celulares */
+ .partners-grid> :nth-child(3n),/* Oculta os itens da terceira coluna */
+ .partners-grid> :nth-child(3n-1)~ :nth-child(n) {/* Oculta os itens subsequentes da terceira coluna */
+    display: none !important;
+}
 
     .footer-bottom-content {
         flex-direction: row;
@@ -1659,6 +1726,7 @@ form button:hover {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1670,6 +1738,7 @@ form button:hover {
         opacity: 0;
         transform: translateY(50px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1752,7 +1821,7 @@ form button:hover {
 
 /* Estilização personalizada para o banner de cookies */
 .cc-window {
-    font-family: 'DM Sans', sans-serif;
+    font-family: "DM Sans", sans-serif;
     font-size: 0.9rem;
     padding: 15px;
     border-radius: 8px;
@@ -1771,8 +1840,12 @@ form button:hover {
 }
 
 /* Responsividade Geral (Retina Displays) */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .logo img, .service img, .client-photo {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+    .logo img,
+    .service img,
+    .client-photo {
         image-rendering: -webkit-optimize-contrast;
     }
 }
