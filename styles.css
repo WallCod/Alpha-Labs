@@ -65,6 +65,8 @@ header .container {
     margin-top: 5px;
     color: #f8fafa;
     font-family: 'monospace';
+    position: relative;
+    bottom: 6px;
 }
 
 nav {
@@ -1453,107 +1455,6 @@ form button:hover {
     box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
 }
 
-/* Estilo para o parágrafo "Powered By" */
-.powered {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: white;
-    text-align: center;
-}
-
-.powered a {
-    color: #ffeb3b;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.powered a:hover {
-    color: #ffd700;
-    text-decoration: underline;
-}
-
-/* Botão Voltar ao Topo */
-#backToTop {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(45deg, #1a73e8, #2c5282);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 999;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#backToTop.visible {
-    opacity: 1;
-}
-
-#backToTop:hover {
-    transform: scale(1.1);
-}
-
-/* Estilização personalizada para o banner de cookies */
-.cc-window {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.cc-btn {
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.cc-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(255, 235, 59, 0.5);
-}
-
-/* Responsividade do Botão Voltar ao Topo */
-@media (max-width: 768px) {
-    #backToTop {
-        bottom: 60px;
-        left: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    #backToTop {
-        width: 40px;
-        height: 40px;
-        bottom: 10px;
-        left: 10px;
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-height: 480px) and (min-width: 768px) {
-    #backToTop {
-        bottom: 20px;
-        left: 20px;
-    }
-}
-
-/* Responsividade Geral (Retina Displays) */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .logo img, .service img, .client-photo {
-        image-rendering: -webkit-optimize-contrast;
-    }
-}
-
 /* Responsividade do Contato */
 @media (max-width: 768px) {
     .footer-content {
@@ -1752,5 +1653,106 @@ form button:hover {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Botão Voltar ao Topo */
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #1a73e8, #2c5282);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#backToTop.visible {
+    opacity: 1;
+}
+
+#backToTop:hover {
+    transform: scale(1.1);
+}
+
+/* Responsividade do Botão Voltar ao Topo */
+@media (max-width: 768px) {
+    #backToTop {
+        bottom: 60px;
+        left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #backToTop {
+        width: 40px;
+        height: 40px;
+        bottom: 10px;
+        left: 10px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-height: 480px) and (min-width: 768px) {
+    #backToTop {
+        bottom: 20px;
+        left: 20px;
+    }
+}
+
+/* Estilo para o parágrafo "Powered By" */
+.powered {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: white;
+    text-align: center;
+}
+
+.powered a {
+    color: #ffeb3b;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.powered a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+/* Estilização personalizada para o banner de cookies */
+.cc-window {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cc-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cc-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 235, 59, 0.5);
+}
+
+/* Responsividade Geral (Retina Displays) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .logo img, .service img, .client-photo {
+        image-rendering: -webkit-optimize-contrast;
     }
 }
