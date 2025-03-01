@@ -23,33 +23,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Sf3xTxDm21AHTfzLnrcBDe7FvwJWOngwpi32yXPEwEsB3KHQVnxPpxTkseNFS8yWM4r4Cfn9El/gty/EIsvPUi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css" integrity="sha512-LQe5q2mQEG8Yu9HY+FK8fXLkNAk3IQ4bpxb49u+Uw/3t9bYckg/7z0z5gR+2rC4b2h5I8mY/C5h7vVsDIEP5MQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
 </head>
 
 <body>
     <!--banner aviso sobre cookies-->
-    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
-    <script>
-        window.cookieconsent.initialise({
-            "palette": {
-                "popup": {
-                    "background": "#edf2f7",
-                    "text": "#333"
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" integrity="sha512-yR55OH1HQklHZOCjqxIDQ6kF9kMLn2AbhjQQp9+hS6sihe1BdhFJMzvkgMW4KXbnn2p4sIZawbPgyFTHgIWmho==" crossorigin="anonymous" defer></script> 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof CookieConsent !== 'undefined') {
+            CookieConsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#edf2f7",
+                        "text": "#333"
+                    },
+                    "button": {
+                        "background": "#ffeb3b",
+                        "text": "#1a73e8"
+                    }
                 },
-                "button": {
-                    "background": "#ffeb3b",
-                    "text": "#1a73e8"
+                "theme": "classic",
+                "content": {
+                    "message": "Este site usa cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa ",
+                    "dismiss": "Aceitar",
+                    "link": "Política de Privacidade",
+                    "href": "https://drive.google.com/file/d/1ZJxe9l40eUq0MP_DXlyLF2ocAYp24fJ8/view"
                 }
-            },
-            "theme": "classic",
-            "content": {
-                "message": "Este site usa cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa ",
-                "dismiss": "Aceitar",
-                "link": "Política de Privacidade",
-                "href": "https://drive.google.com/file/d/1ZJxe9l40eUq0MP_DXlyLF2ocAYp24fJ8/view"
-            }
-        });
-    </script>
+            });
+        } else {
+            console.error('CookieConsent não está carregado');
+        }
+    });
+</script>
 
     <!-- Cabeçalho -->
 <header>
