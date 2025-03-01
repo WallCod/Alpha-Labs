@@ -22,6 +22,8 @@ document.querySelectorAll('.nav-links a').forEach(anchor => {
     });
 });
 
+
+//Menu Hamburguer
 document.querySelector('#navToggle').addEventListener('click', function() {
     document.querySelector('.nav-links').classList.toggle('active');
 });

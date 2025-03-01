@@ -675,193 +675,305 @@ body.dark .form-group textarea {
     }
 }
 
-/* Chatbot */
-.chatbot {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
+/* Chatbot - Estilos com máxima especificidade e depuração */
+#chatbot {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important; /* Aumenta o z-index para garantir prioridade */
 }
 
-.chatbot-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #1a73e8, #2c5282);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
+#chatbot .chatbot-icon {
+    width: 60px !important;
+    height: 60px !important;
+    background: linear-gradient(45deg, #1a73e8, #2c5282) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.3s !important;
 }
 
-.chatbot-icon:hover {
-    transform: scale(1.1);
+#chatbot .chatbot-icon:hover {
+    transform: scale(1.1) !important;
 }
 
-.chatbot-icon img {
-    width: 40px;
-    height: 40px;
+#chatbot .chatbot-icon img {
+    width: 40px !important;
+    height: 40px !important;
 }
 
-.chatbot-content {
-    width: 300px;
-    background: #ffffff;
-    /* Fundo branco, como na imagem */
-    border: 2px solid #e5e7eb;
-    /* Borda clara, cinza leve */
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    position: absolute;
-    bottom: 70px;
-    right: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    z-index: 1001;
+#chatbot .chatbot-content {
+    width: 300px !important;
+    background: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    padding: 15px !important;
+    position: absolute !important;
+    bottom: 70px !important;
+    right: 0 !important;
+    transition: opacity 0.3s, transform 0.3s !important;
+    z-index: 10001 !important; /* Aumenta o z-index para garantir prioridade sobre outros elementos */
 }
 
-body.dark .chatbot-content {
-    background: #2d3748;
-    /* Cinza escuro no modo escuro, consistente com o site */
-    border-color: #4a5568;
-    /* Borda mais escura no modo escuro */
+body.dark #chatbot .chatbot-content {
+    background: #2d3748 !important;
+    border-color: #4a5568 !important;
 }
 
-.chatbot-content.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
+#chatbot .chatbot-content.hidden {
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    pointer-events: none !important;
 }
 
-.chat-output {
-    height: 200px;
-    overflow-y: auto;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #f6f7f8;
-    /* Fundo branco para mensagens */
-    border-radius: 5px;
-    border: 1px solid #e5e7eb;
-    /* Borda clara para o chat-output */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    line-height: 1.5;
+#chatbot .chat-output {
+    height: 200px !important;
+    overflow-y: auto !important;
+    margin-bottom: 15px !important;
+    padding: 10px !important;
+    background-color: #f6f7f8 !important;
+    border-radius: 5px !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    line-height: 1.5 !important;
 }
 
-body.dark .chat-output {
-    background-color: #2d3748;
-    /* Cinza escuro no modo escuro */
-    border-color: #4a5568;
-    /* Borda mais escura no modo escuro */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+body.dark #chatbot .chat-output {
+    background-color: #2d3748 !important;
+    border-color: #4a5568 !important;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2) !important;
 }
 
-.chat-message.user {
-    background-color: #e3f2fd;
-    /* Azul claro para mensagens do usuário, visível */
-    border: 1px solid #00ced1;
-    /* Borda ciano para o usuário, consistente com o site */
-    border-radius: 5px;
-    padding: 8px 12px;
-    margin: 5px 0;
-    text-align: right;
-    color: #000000;
-    /* Texto preto para visibilidade */
-    animation: slideInRight 0.5s ease-out;
+#chatbot .chat-message.user {
+    background-color: #e3f2fd !important;
+    border: 1px solid #00ced1 !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    margin: 5px 0 !important;
+    text-align: right !important;
+    color: #000000 !important;
+    animation: slideInRight 0.5s ease-out !important;
 }
 
-.chat-message.bot {
-    background-color: #ffffff;
-    /* Fundo branco para o bot, como na imagem */
-    border: 1px solid #adb6c9;
-    /* Borda clara para o bot */
-    border-radius: 5px;
-    padding: 8px 12px;
-    margin: 5px 0;
-    text-align: left;
-    color: #333333;
-    /* Texto cinza escuro para contraste */
-    animation: slideInLeft 0.5s ease-out;
+#chatbot .chat-message.bot {
+    background-color: #ffffff !important;
+    border: 1px solid #adb6c9 !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    margin: 5px 0 !important;
+    text-align: left !important;
+    color: #333333 !important;
+    animation: slideInLeft 0.5s ease-out !important;
 }
 
-body.dark .chat-message.user {
-    background-color: #4a5568;
-    /* Cinza escuro no modo escuro para usuário */
-    border-color: #00ced1;
-    /* Mantém a borda ciano */
-    color: #ffffff;
-    /* Texto branco no modo escuro */
+body.dark #chatbot .chat-message.user {
+    background-color: #4a5568 !important;
+    border-color: #00ced1 !important;
+    color: #ffffff !important;
 }
 
-body.dark .chat-message.bot {
-    background-color: #2d3748;
-    /* Cinza mais escuro no modo escuro para bot */
-    border-color: #4a5568;
-    /* Borda mais escura no modo escuro */
-    color: #ffffff;
-    /* Texto branco no modo escuro */
+body.dark #chatbot .chat-message.bot {
+    background-color: #2d3748 !important;
+    border-color: #4a5568 !important;
+    color: #ffffff !important;
 }
 
-.chatbot input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+#chatbot input {
+    width: 100% !important;
+    padding: 10px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+    transition: border-color 0.3s, box-shadow 0.3s !important;
 }
 
-.chatbot input:focus {
-    border-color: #00ced1;
-    /* Ciano, consistente com o título Alpha Labs */
-    box-shadow: 0 0 5px rgba(0, 206, 209, 0.5);
-    outline: none;
+#chatbot input:focus {
+    border-color: #00ced1 !important;
+    box-shadow: 0 0 5px rgba(0, 206, 209, 0.5) !important;
+    outline: none !important;
 }
 
 /* Responsividade do Chatbot */
 @media (max-width: 768px) {
-    .chatbot-content {
-        width: 90%;
-        right: 5%;
+    #chatbot {
+        bottom: 15px !important;
+        right: 15px !important;
+    }
+
+    #chatbot .chatbot-icon {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    #chatbot .chatbot-icon img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    #chatbot .chatbot-content {
+        width: 550px !important; /* Reduz para 550px, menor que 600px para evitar "esticado" */
+        max-width: 95% !important; /* Mantém 95% para maximizar a largura em celulares, com !important */
+        right: 2.5% !important; /* Centraliza ainda mais, ajustando a posição, com !important */
+        bottom: 60px !important; /* Mantém a distância do fundo consistente, com !important */
+        padding: 10px !important; /* Mantém o padding, mas ajustado para telas pequenas, com !important */
+    }
+
+    #chatbot .chatbot-content::after {
+        content: "Debug: Styled Width = " attr(style) " | Computed Width = " attr(computed-width) " | Parent Width = " attr(parent-width) " | Window Width = " attr(window-width);
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: yellow !important;
+        font-size: 12px !important;
+        background: rgba(0, 0, 0, 0.7) !important;
+        z-index: 10002 !important;
+    }
+
+    #chatbot .chat-output {
+        height: 200px !important; /* Mantém a altura original para consistência com telas grandes */
+        padding: 8px !important;
+    }
+
+    #chatbot input {
+        padding: 8px !important;
+        font-size: 0.9rem !important;
     }
 }
 
 @media (max-width: 480px) {
-    .chatbot {
-        bottom: 10px;
-        right: 10px;
+    #chatbot {
+        bottom: 10px !important;
+        right: 10px !important;
     }
 
-    .chatbot-icon {
-        width: 50px;
-        height: 50px;
+    #chatbot .chatbot-icon {
+        width: 40px !important;
+        height: 40px !important;
     }
 
-    .chatbot-icon img {
-        width: 30px;
-        height: 30px;
+    #chatbot .chatbot-icon img {
+        width: 25px !important;
+        height: 25px !important;
     }
 
-    .chatbot-content {
-        width: 80%;
-        right: 5%;
-        padding: 10px;
+    #chatbot .chatbot-content {
+        width: 550px !important; /* Mantém 550px para evitar "fino" e "esticado", com !important */
+        max-width: 95% !important; /* Mantém 95% para maximizar a largura em telas muito pequenas, com !important */
+        right: 2.5% !important;
+        bottom: 50px !important; /* Ajusta para telas menores, com !important */
+        padding: 8px !important;
     }
 
-    .chat-output {
-        height: 150px;
+    #chatbot .chat-output {
+        height: 200px !important; /* Mantém a altura original para consistência */
+        padding: 6px !important;
     }
 
-    .chatbot input {
-        padding: 8px;
-        font-size: 0.9rem;
+    #chatbot input {
+        padding: 6px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 320px) {
+    #chatbot {
+        bottom: 5px !important;
+        right: 5px !important;
+    }
+
+    #chatbot .chatbot-icon {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    #chatbot .chatbot-icon img {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    #chatbot .chatbot-content {
+        width: 550px !important; /* Mantém 550px para evitar "fino" e "esticado", com !important */
+        max-width: 95% !important; /* Mantém 95% para maximizar a largura em telas muito pequenas, com !important */
+        right: 2.5% !important;
+        bottom: 45px !important;
+        padding: 6px !important;
+    }
+
+    #chatbot .chat-output {
+        height: 200px !important; /* Mantém a altura original para consistência */
+        padding: 5px !important;
+    }
+
+    #chatbot input {
+        padding: 5px !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #chatbot .chatbot-content {
+        width: 300px !important; /* Reforça o layout original nas telas grandes, com !important */
+        max-width: none !important; /* Remove qualquer restrição de max-width em telas grandes, com !important */
     }
 }
 
 @media (min-width: 1200px) {
-    .chatbot {
-        bottom: 30px;
-        right: 30px;
+    #chatbot {
+        bottom: 30px !important;
+        right: 30px !important;
+    }
+}
+
+/* Animações */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Depuração Avançada */
+@media (max-width: 768px) {
+    #chatbot .chatbot-content {
+        background-color: rgba(255, 0, 0, 0.3) !important; /* Destaca o pop-up para teste */
+        border: 2px solid red !important; /* Adiciona borda para visualizar limites */
+        width: 550px !important; /* Mantém 550px para teste */
+        max-width: 95% !important; /* Garante que não ultrapasse a tela */
+        min-width: 300px !important; /* Define um mínimo para evitar "fino" extremo */
+        right: 2.5% !important;
+        bottom: 60px !important;
+        padding: 10px !important;
+    }
+
+    #chatbot .chatbot-content::after {
+        content: "Debug: Styled Width = " attr(style) " | Computed Width = " attr(computed-width) " | Parent Width = " attr(parent-width) " | Window Width = " attr(window-width) " | Screen Width = " attr(screen-width);
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: yellow !important;
+        font-size: 12px !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        z-index: 10003 !important;
     }
 }
 
