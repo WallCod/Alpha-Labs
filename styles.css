@@ -54,6 +54,8 @@ header .container {
     height: auto;
     object-fit: contain;
     transition: transform 0.3s;
+    position: relative;
+    bottom: 10px;
 }
 
 .logo h1 {
