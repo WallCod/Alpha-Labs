@@ -22,6 +22,10 @@ document.querySelectorAll('.nav-links a').forEach(anchor => {
     });
 });
 
+document.querySelector('#navToggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+});
+
     // Abrir Modal de Demonstração
     document.getElementById('demoBtn').addEventListener('click', function() {
         const modal = document.getElementById('demoModal');

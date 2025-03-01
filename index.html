@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Sf3xTxDm21AHTfzLnrcBDe7FvwJWOngwpi32yXPEwEsB3KHQVnxPpxTkseNFS8yWM4r4Cfn9El/gty/EIsvPUi" crossorigin="anonymous">
 </head>
 
 <body>
@@ -51,25 +52,28 @@
     </script>
 
     <!-- Cabeçalho -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="./img/logo2.png" alt="Logo Alpha Labs" width="120" height="108">
-                <h1>Alpha Labs</h1>
-            </div>
-
-            <nav aria-label="Navegação principal">
-                <ul class="nav-links">
-                    <li><a href="#inicio" class="active">Início</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#depoimentos">Depoimentos</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                    <li><button id="themeToggle" aria-label="Alternar tema">🌙</button></li>
-                </ul>
-            </nav>
+    <!-- Cabeçalho -->
+<header>
+    <div class="container">
+        <div class="logo">
+            <img src="./img/logo2.png" alt="Logo Alpha Labs" width="120" height="108">
+            <h1>Alpha Labs</h1>
         </div>
-    </header>
+        <div class="menu-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav aria-label="Navegação principal">
+            <ul class="nav-links">
+                <li><a href="#inicio" class="active">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><button id="themeToggle" aria-label="Alternar tema">🌙</button></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
     <!-- Modal para Agendamento de Teste Grátis -->
     <div id="demoModal" class="modal" role="dialog" aria-hidden="true">
@@ -365,7 +369,7 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="./script.js"></script>
+    <script defer src="./script.js"></script>
 </body>
 
 </html>
