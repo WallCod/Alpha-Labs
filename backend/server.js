@@ -232,36 +232,6 @@ app.post('/api/contato', async (req, res) => {
     }
 });
 
-// Rota para o chatbot com Google Gemini
-app.post('/api/chat', async (req, res) => {
-    try {
-        const { message } = req.body;
-        const apiKey = process.env.GEMINI_API_KEY;
-        if (!apiKey) {
-            return res.status(500).json({ error: 'Chave API do Gemini não configurada.' });
-        }
-
-        const response = await axios.post('https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent', {
-            contents: [{
-                parts: [{
-                    text: `Responda como um assistente amigável, técnico e divertido da Alpha Labs, usando linguagem coloquial, contratações, e emojis (como 😊, 😅), variando as respostas para evitar repetição. Pergunta: ${message}`
-                }]
-            }]
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            }
-        });
-
-        const botResponse = response.data.candidates[0].content.parts[0].text;
-        res.json({ response: botResponse });
-    } catch (error) {
-        console.error('Erro no Google Gemini:', error.message);
-        res.status(500).json({ error: 'Erro ao processar a mensagem do chatbot. Tente novamente mais tarde.' });
-    }
-});
-
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
