@@ -238,6 +238,9 @@ chatInput.addEventListener('keypress', function (e) {
 
 function generateBotResponse(userMessage) {
     const lowerMessage = userMessage.toLowerCase();
+    if (lowerMessage.length < 2) {
+        return `Hmm, mensagem muito curta, ${userName || 'amigo'}. Tente algo como 'Serviços', 'Suporte' ou 'Sobre Nós'. 😅`;
+    }
     const lastUserMessage = conversationHistory[conversationHistory.length - 1]?.text.toLowerCase() || '';
 
     // Tentar identificar o nome do usuário
@@ -284,16 +287,32 @@ function generateBotResponse(userMessage) {
             `Ofertas Alpha Labs: 20% off em  software a R$ 199,90/mês. Interessado? Contate-nos em alphalabsia@gmail.com ou veja em <a href="/ofertas">aqui</a> 😊`
         ],
         'serviços': [
-            `Na Alpha Labs, oferecemos Consultoria, Instalação e Suporte Técnico. Qual te interessa? Digite 'Consultoria', 'Instalação' ou 'Suporte Técnico'.`,
-            `Nossos serviços são tops: Consultoria, Instalação e Suporte Técnico. Quer saber mais sobre algum? Digite o nome! 😊`
+            `Na Alpha Labs, oferecemos Consultoria, Implementação e Suporte Técnico. Qual te interessa? Digite 'Consultoria', 'Implementação' ou 'Suporte Técnico'.`,
+            `Nossos serviços são tops: Consultoria, Implementação e Suporte Técnico. Quer saber mais sobre algum? Digite o nome! 😊`
         ],
         'consultoria': [
             `Nossa consultoria ajuda a otimizar negócios com IA e automação. Quer saber sobre Custos, Resultados ou Agendamento? Digite uma opção!`,
             `Consultoria Alpha Labs: IA e automação para crescer. O que te interessa? Custos, Resultados ou Agendamento? 😊 Veja em <a href="/servicos/consultoria">aqui</a>.`
         ],
-        'instalação': [
-            `Oferecemos instalação rápida de software e hardware. Quer saber sobre Preços, Tempo ou Suporte? Digite uma opção!`,
-            `Instalação Alpha Labs: rápida e eficiente. O que te interessa? Preços, Tempo ou Suporte? 😊 Confira em <a href="/servicos/instalacao">aqui</a>.`
+        'consultoria de software': [
+            `Nossa Consultoria de Software ajuda a otimizar negócios com automação e IA. Quer saber sobre Custos, Resultados ou Agendamento? Digite uma opção!`,
+            `Consultoria de Software Alpha Labs: IA e automação para crescer. O que te interessa? Custos, Resultados ou Agendamento? 😊 Veja em <a href="/servicos/consultoria-software">aqui</a>.`
+        ],
+        'desenvolvimento de soluções': [
+            `Nosso Desenvolvimento de Soluções cria softwares sob medida para automação e análise. Quer saber sobre Preços, Funcionalidades ou Cronograma? Digite uma opção!`,
+            `Desenvolvimento de Soluções Alpha Labs: softwares personalizados para automação. O que te interessa? Preços, Funcionalidades ou Cronograma? 😊 Confira em <a href="/servicos/desenvolvimento-solucoes">aqui</a>.`
+        ],
+        'cronograma': [
+            `Nosso cronograma para Desenvolvimento de Soluções é de 2 a 8 semanas, dependendo do projeto. Quer saber sobre etapas, prazos ou revisões? Digite uma opção!`,
+            `Cronograma Alpha Labs: 2-8 semanas para soluções sob medida. O que te interessa? Etapas, Prazos ou Revisões? 😊 Confira em <a href="/servicos/desenvolvimento-solucoes">aqui</a>.`
+        ],
+        'processos': [
+            `Nosso processo de suporte inclui tickets, chat e follow-up. Quer saber sobre abertura de tickets, resolução ou acompanhamento? Digite uma opção!`,
+            `Processos Alpha Labs: tickets, chat, follow-up. O que te interessa? Abertura, Resolução ou Acompanhamento? 😊 Confira em <a href="/suporte">aqui</a>.`
+        ],
+        'implementação': [
+            `Oferecemos implementação rápida de software e . Quer saber sobre Preços, Tempo ou Suporte? Digite uma opção!`,
+            `Implementação Alpha Labs: rápida e eficiente. O que te interessa? Preços, Tempo ou Suporte? 😊 Confira em <a href="/servicos/implementacao">aqui</a>.`
         ],
         'suporte técnico': [
             `Nosso suporte é 24/7, com tickets e chat. Quer saber sobre Horários, Processos ou Contato? Digite uma opção!`,
