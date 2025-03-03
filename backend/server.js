@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configurar CORS para permitir origens específicas (ajuste para o servidor local do frontend e GitHub Pages)
-const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500', 'https://wallcod.github.io/Alpha-Labs', 'alphalabs.lat']; // Substitua SEUNOME pelo seu username no GitHub
+const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:5500', 'http://localhost:5500', 'https://wallcod.github.io/Alpha-Labs', 'https://alphalabs.lat']; // Substitua SEUNOME pelo seu username no GitHub
 app.use(cors({
     origin: function(origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
