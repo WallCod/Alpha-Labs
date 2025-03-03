@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://Alpha:AlphaLabs@alphalabs-shard-00-01.shdmn.mongodb.net/AlphaLabs?retryWrites=true&w=majority';
 
 mongoose.connect(mongoURI, {
-    serverSelectionTimeoutMS: 5000 // Tempo limite para seleção de servidor
+    serverSelectionTimeoutMS: 15000 // Tempo limite para seleção de servidor
 }).then(() => {
     console.log('Conectado ao MongoDB Atlas com sucesso!');
 }).catch(err => {
@@ -102,6 +102,11 @@ transporter.verify((error, success) => {
 app.use((err, req, res, next) => {
     console.error('Erro inesperado no middleware:', err);
     res.status(500).json({ success: false, message: 'Erro interno no servidor. Tente novamente mais tarde.' });
+});
+
+// Adicionar no início, antes das rotas POST  - recente
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'API da Alpha Labs - Use /api/contato ou /api/agendar-demo para envios.' });
 });
 
 // Rota para processar o agendamento de demonstração
