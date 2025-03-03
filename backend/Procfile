@@ -1,3 +1,3 @@
 web: node backend/server.js
 
-heroku config:set MONGODB_URI=mongodb://Alpha:AlphaLabs2026@alphalabs-shard-00-01.shdmn.mongodb.net:27017/AlphaLabs?retryWrites=true&w=majority
+heroku config:set MONGODB_URI=mongodb+srv://Alpha:AlphaLabs2026@alphalabs-shard-00-01.shdmn.mongodb.net/AlphaLabs?retryWrites=true&w=majority
