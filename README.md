@@ -46,7 +46,7 @@ Este projeto está licenciado sob a Licença MIT — veja o arquivo `LICENSE` pa
 ---
 
 ## 💡 Suporte
-Se você tiver problemas ou dúvidas, abra uma *issue* no GitHub ou entre em contato com nossa equipe em `suporte@alphalabs.lat`. Junte-se à nossa jornada e transforme negociações com Alpha Labs!
+Se você tiver problemas ou dúvidas, abra uma *issue* no GitHub ou entre em contato com nossa equipe em `suport@alphalabs.lat`. Junte-se à nossa jornada e transforme negociações com Alpha Labs!
 
 ---
 
