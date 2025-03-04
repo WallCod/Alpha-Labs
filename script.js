@@ -75,7 +75,7 @@ document.querySelector('#navToggle').addEventListener('click', function() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/api/agendar-demo', {
+            const response = await fetch('https://alpha-labs.onrender.com/api/agendar-demo', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, phone, date, message }),
@@ -147,7 +147,7 @@ document.querySelector('#navToggle').addEventListener('click', function() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/api/contato', {
+            const response = await fetch('https://alpha-labs.onrender.com/api/contato', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, message }),
