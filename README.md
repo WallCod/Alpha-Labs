@@ -6,6 +6,8 @@
 ## 🌐 Versão em Português
 Se quiser a versão em inglês, [clique aqui](#versao-em-ingles).
 
+<a href="https://alphalabs.lat"> Clique aqui</a> para acessar o site.
+
 ---
 
 ## 🎯 Visão Geral
