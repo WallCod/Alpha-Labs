@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script src="https://unpkg.com/cookieconsent@3/build/cookieconsent.min.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W7WMFN7H84"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-    
-        // Inicializa o CookieConsent com callback e monitoramento
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verifica periodicamente se CookieConsent está definido
-            const checkCookieConsent = setInterval(function() {
-                if (typeof CookieConsent !== 'undefined') {
-                    clearInterval(checkCookieConsent); // Para o intervalo quando CookieConsent estiver pronto
-                    
-                    // Configura e inicializa o CookieConsent
-                    CookieConsent.run({
-                        palette: {
-                            popup: { background: '#edf2f7', text: '#333' },
-                            button: { background: '#ffeb3b', text: '#1a73e8' }
-                        },
-                        theme: 'classic',
-                        position: 'bottom-right',
-                        content: {
-                            message: 'Este site usa cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa ',
-                            dismiss: 'Aceitar',
-                            link: 'Política de Privacidade',
-                            href: 'https://drive.google.com/file/d/1ZJxe9l40eUq0MP_DXlyLF2ocAYp24fJ8/view'
-                        },
-                        onAccept: function() {
-                            // Executa o GTM apenas se a categoria "statistics" for aceita
-                            if (CookieConsent.acceptedCategory("statistics")) {
-                                gtag('js', new Date());
-                                gtag('config', 'G-W7WMFN7H84');
-                            }
-                        }
-                    });
+<!-- Carrega o cookieconsent -->
+<script src="/js/cookieconsent.min.js" data-cfasync="false"></script>
+<!-- Carrega o Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7WMFN7H84"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    // Inicializa o cookieconsent quando a página carrega
+    window.addEventListener('load', function() {
+        if (typeof CookieConsent !== 'undefined') {
+            CookieConsent.run({
+                palette: {
+                    popup: { background: '#edf2f7', text: '#333' },
+                    button: { background: '#ffeb3b', text: '#1a73e8' }
+                },
+                theme: 'classic',
+                position: 'bottom-right',
+                content: {
+                    message: 'Este site usa cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa ',
+                    dismiss: 'Aceitar',
+                    link: 'Política de Privacidade',
+                    href: 'https://drive.google.com/file/d/1ZJxe9l40eUq0MP_DXlyLF2ocAYp24fJ8/view'
+                },
+                onAccept: function() {
+                    if (CookieConsent.acceptedCategory("statistics")) {
+                        gtag('js', new Date());
+                        gtag('config', 'G-W7WMFN7H84');
+                    }
                 }
-            }, 100); // Verifica a cada 100ms
-        });
-    </script>
+            });
+        } else {
+            console.error('CookieConsent não foi carregado. Verifique o script.');
+        }
+    });
+</script>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
