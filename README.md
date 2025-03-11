@@ -10,7 +10,6 @@ Se quiser a versão em inglês, [clique aqui](#versao-em-ingles).
 
 ---
 
-
 ## 🎯 Visão Geral
 Bem-vindo ao **Alpha Labs**, uma plataforma de ponta especializada em automação baseada em IA, soluções de software e suporte técnico. Este repositório hospeda o backend (Node.js com Express, MongoDB Atlas e Nodemailer) e o frontend (HTML, CSS, JavaScript) do Alpha Labs, permitindo que usuários agendem demonstrações e enviem mensagens de contato de forma fluida. Nossa missão é transformar negócios com automação inteligente e tecnologia inovadora, garantindo escalabilidade e eficiência.
 
