@@ -1,39 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W7WMFN7H84"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-    
-        console.log("Verificando cookie de consentimento...");
-        if (!Cookies.get('cookieConsent')) {
-            console.log("Cookie de consentimento não encontrado, exibindo popup...");
-            const popup = document.createElement('div');
-            popup.style.position = 'fixed';
-            popup.style.bottom = '10px';
-            popup.style.right = '10px';
-            popup.style.background = '#edf2f7';
-            popup.style.padding = '10px';
-            popup.style.border = '1px solid #333';
-            popup.innerHTML = `
-                Este site usa cookies. <button onclick="acceptCookies()">Aceitar</button>
-            `;
-            document.body.appendChild(popup);
-        } else {
-            console.log("Cookie de consentimento já existe:", Cookies.get('cookieConsent'));
-        }
-    
-        function acceptCookies() {
-            Cookies.set('cookieConsent', 'accepted', { expires: 365 });
-            document.querySelector('div').remove();
-            console.log("Cookies aceitos, ativando GTM...");
-            gtag('js', new Date());
-            gtag('config', 'G-W7WMFN7H84');
-        }
-    </script>
 
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous">
+</head>
 
+<body>
     <!-- Cabeçalho -->
     <header>
         <div class="container">
@@ -345,8 +315,7 @@
             </div>
         </div>
 
-        <p class="powered">Developed by: <a href="https://github.com/WallCod"
-                target="_blank">WallCod</a></p>
+        <p class="powered">Developed by: <a href="https://github.com/WallCod" target="_blank">WallCod</a></p>
     </footer>
 
     <!-- Pop-up de sucesso para o formulário de contato -->
@@ -367,6 +336,55 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script defer src="./script.js"></script>
-</body>
 
+    <!-- Scripts js-cookie e google tag manager -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7WMFN7H84"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    console.log("Verificando cookie de consentimento...");
+    if (!Cookies.get('cookieConsent')) {
+        console.log("Cookie de consentimento não encontrado, exibindo popup...");
+        const popup = document.createElement('div');
+        popup.id = 'cookie-consent-popup'; // Adiciona um ID único
+        popup.style.position = 'fixed';
+        popup.style.bottom = '20px';
+        popup.style.left = '50%';
+        popup.style.transform = 'translateX(-50%)';
+        popup.style.background = '#f9f9f9';
+        popup.style.padding = '15px 25px';
+        popup.style.borderRadius = '10px';
+        popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+        popup.style.width = '400px';
+        popup.style.border = '1px solid #ddd';
+        popup.style.zIndex = '1000';
+        popup.style.fontFamily = 'Arial, sans-serif';
+        popup.style.textAlign = 'center';
+        popup.innerHTML = `
+            <p style="margin: 0 0 10px 0; color: #333;">Este site usa cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="https://drive.google.com/file/d/1ZJxe9l40eUq0MP_DXlyLF2ocAYp24fJ8/view" target="_blank" style="color: #1a73e8; text-decoration: underline;">Política de Privacidade</a>.</p>
+            <button onclick="acceptCookies()" style="background: #ffeb3b; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; color: #1a73e8; font-weight: bold;">Aceitar</button>
+        `;
+        document.body.appendChild(popup);
+    } else {
+        console.log("Cookie de consentimento já existe:", Cookies.get('cookieConsent'));
+    }
+
+    function acceptCookies() {
+        Cookies.set('cookieConsent', 'accepted', { expires: 7 });
+        const popup = document.getElementById('cookie-consent-popup'); // Seleciona pelo ID
+        if (popup) {
+            popup.remove(); // Remove o popup
+            console.log("Popup removido com sucesso.");
+        } else {
+            console.error("Popup não encontrado para remoção.");
+        }
+        console.log("Cookies aceitos, ativando GTM...");
+        gtag('js', new Date());
+        gtag('config', 'G-W7WMFN7H84');
+    }
+</script>
+
+</body>
 </html>
