@@ -211,8 +211,8 @@ chatbotIcon.addEventListener('click', function () {
         chatInput.focus();
         // Saudação inicial se for a primeira abertura
         if (conversationHistory.length === 0) {
-            const greeting = "Oi! Eu sou o AlphaBot, seu assistente da Alpha Labs. Como posso te ajudar hoje? 😊 Qual é o seu nome?";
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>AlphaBot:</strong> ${greeting}</p>`;
+            const greeting = "Oi! Eu sou o Alpha, seu assistente da Alpha Labs. Como posso te ajudar hoje?😊";
+            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${greeting}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
         }
     }
@@ -230,11 +230,11 @@ chatInput.addEventListener('keypress', async function (e) {
         // Enviar mensagem para o n8n e obter resposta do agente
         try {
             const botResponse = await sendMessageToN8n(userMessage);
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>AlphaBot:</strong> ${botResponse}</p>`;
+            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botResponse}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
         } catch (error) {
             console.error('Erro ao chamar o n8n:', error);
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>AlphaBot:</strong> Desculpe, algo deu errado. Tente novamente! 😅</p>`;
+            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> Desculpe, algo deu errado. Tente novamente! 😅</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
         }
 
