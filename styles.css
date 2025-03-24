@@ -675,6 +675,112 @@ body.dark .form-group textarea {
     }
 }
 
+/*Balões acima do chatbot*/
+.chatbot-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Garante que o wrapper fique acima de outros elementos */
+}
+
+.chatbot-bubbles {
+    position: relative;
+    bottom: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column; /* Disposição horizontal (um em cima do outro) */
+    align-items: center; /* Alinha os balões verticalmente no centro */
+    gap: 10px; /* Espaço horizontal entre os balões */
+    z-index: 1000;
+}
+
+.bubble {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 8px 12px; /* Ajustado para um tamanho mais compacto */
+    border-radius: 5px; /* Formato completamente retangular */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-width: 320px; /* Ajustado para um tamanho mais compacto */
+    font-size: 14px;
+    line-height: 1;
+    font-family: Arial, sans-serif;
+}
+
+.bubble-2 {
+    border-radius: 5px; /* Mesmo border-radius para consistência */
+    position: relative;
+    left: 55px;
+    
+}
+
+.chatbot-input {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    background-color: white;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Resposividade dos Balões */
+@media (max-width: 768px) {
+    .chatbot-wrapper {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .chatbot-bubbles {
+        bottom: 60px;
+        gap: 5px; /* Reduz o espaço entre os balões */
+    }
+
+    .bubble {
+        font-size: 12px;
+        max-width: 280px; /* Ajusta tamanho para telas menores */
+    }
+
+    .bubble-2 {
+        left: 30px; /* Reposiciona em telas pequenas */
+    }
+
+    .chatbot-input input {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-bubbles {
+        bottom: 40px;
+    }
+
+    .bubble {
+        font-size: 10px;
+        max-width: 240px;
+    }
+
+    .bubble-2 {
+        left: 10px;
+    }
+
+    .chatbot-input {
+        gap: 5px; /* Espaço menor entre os elementos */
+    }
+
+    .chatbot-input input {
+        font-size: 10px;
+    }
+}
+
+
 /* Chatbot - Estilos com máxima especificidade e depuração */
 #chatbot {
     position: fixed !important;

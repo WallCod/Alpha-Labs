@@ -189,56 +189,100 @@ document.querySelector('#navToggle').addEventListener('click', function() {
         }
     });
 
+
 // Chatbot Retrátil
 const chatbotIcon = document.getElementById('chatbotIcon');
 const chatbotContent = document.getElementById('chatbotContent');
 const chatInput = document.getElementById('chatInput');
 const chatOutput = document.getElementById('chatOutput');
+const chatbotBubbles = document.querySelector('.chatbot-bubbles');
 
 // Estado do chatbot para lembrar o nome e histórico
-let userName = '';1
+let userName = '';
 let conversationHistory = [];
 
-// URL do webhook do n8n (substitua pela sua URL real)
-const webhookUrl = 'https://n8n.alphalabs.lat/webhook/c6098f81-b4eb-4c83-8990-2cb52b819900/chat'; // Insira a URL do seu webhook aqui
+// URL do webhook do n8n
+const webhookUrl = 'https://n8n.alphalabs.lat/webhook/c6098f81-b4eb-4c83-8990-2cb52b819900/chat';
 
-chatbotIcon.addEventListener('click', function () {
-    chatbotContent.classList.toggle('hidden');
+// Função para obter ou gerar um sessionId
+function getSessionId() {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+        sessionId = 'user-' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+}
+
+// Função para enviar mensagem ao n8n
+async function sendMessageToN8n(userMessage) {
+    const sessionId = getSessionId();
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: userMessage, sessionId: sessionId })
+        });
+        const data = await response.json();
+        console.log("Resposta do n8n:", data);
+        return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
+    } catch (error) {
+        console.error("Erro ao chamar o n8n:", error);
+        return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
+    }
+}
+
+// Abrir/fechar o chat
+chatbotIcon.addEventListener('click', () => {
+    const isChatOpen = !chatbotContent.classList.contains('hidden');
+    if (isChatOpen) {
+        // Fecha o chat e mostra os balões
+        chatbotContent.classList.add('hidden');
+        chatbotBubbles.style.display = 'flex';
+    } else {
+        // Abre o chat e esconde os balões
+        chatbotContent.classList.remove('hidden');
+        chatbotBubbles.style.display = 'none';
+
+        // Saudação inicial se for a primeira abertura
+        if (conversationHistory.length === 0) {
+            const greeting = "Oi! Eu sou o Alpha, seu assistente da Alpha Labs. Como posso te ajudar hoje? 😊";
+            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${greeting}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+            conversationHistory.push({ sender: 'bot', message: greeting });
+        }
+
+        // Foca no input
+        chatInput.focus();
+    }
+
+    // Atualiza atributos de acessibilidade
     const isOpen = !chatbotContent.classList.contains('hidden');
     chatbotContent.setAttribute('aria-hidden', !isOpen);
     chatbotIcon.setAttribute('aria-expanded', isOpen);
-    if (isOpen) {
-        chatInput.focus();
-        // Saudação inicial se for a primeira abertura
-        if (conversationHistory.length === 0) {
-            const greeting = "Oi! Eu sou o Alpha, seu assistente da Alpha Labs. Como posso te ajudar hoje?😊";
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${greeting}</p>`;
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-        }
-    }
 });
 
-chatInput.addEventListener('keypress', async function (e) {
-    if (e.key === 'Enter' && chatInput.value.trim()) {
+// Enviar mensagem ao pressionar Enter
+chatInput.addEventListener('keypress', async (e) => {
+    if (e.key === 'Enter') {
         const userMessage = chatInput.value.trim();
-        conversationHistory.push({ user: true, text: userMessage });
+        if (userMessage === '') return;
 
-        // Adicionar mensagem do usuário
+        // Adiciona a mensagem do usuário ao chat
         chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
         chatOutput.scrollTop = chatOutput.scrollHeight;
+        conversationHistory.push({ sender: 'user', message: userMessage });
 
-        // Enviar mensagem para o n8n e obter resposta do agente
-        try {
-            const botResponse = await sendMessageToN8n(userMessage);
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botResponse}</p>`;
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-        } catch (error) {
-            console.error('Erro ao chamar o n8n:', error);
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> Desculpe, algo deu errado. Tente novamente! 😅</p>`;
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-        }
-
+        // Limpa o input
         chatInput.value = '';
+
+        // Envia a mensagem ao n8n e exibe a resposta
+        const botReply = await sendMessageToN8n(userMessage);
+        chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botReply}</p>`;
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+        conversationHistory.push({ sender: 'bot', message: botReply });
     }
 });
 
