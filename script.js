@@ -244,20 +244,23 @@ chatInput.addEventListener('keypress', async function (e) {
 
 // Função para enviar mensagem ao n8n e receber resposta
 async function sendMessageToN8n(userMessage) {
-    const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: userMessage }) // Envia a mensagem como JSON
-    });
-
-    const data = await response.json();
-    // Adicione este console.log para depurar
-    console.log("Resposta do n8n:", data);
-    // O n8n deve retornar algo como { "reply": "resposta do agente" }
-    return data.reply || 'Desculpe, não consegui processar sua mensagem.';
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: userMessage })
+        });
+        const data = await response.json();
+        console.log("Resposta do n8n:", data);
+        return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
+    } catch (error) {
+        console.error("Erro ao chamar o n8n:", error);
+        return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
+    }
 }
+
 
     // Modo Escuro
     document.getElementById('themeToggle').addEventListener('click', function() {
