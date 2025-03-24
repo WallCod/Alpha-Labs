@@ -196,7 +196,7 @@ const chatInput = document.getElementById('chatInput');
 const chatOutput = document.getElementById('chatOutput');
 
 // Estado do chatbot para lembrar o nome e histórico
-let userName = '';
+let userName = '';1
 let conversationHistory = [];
 
 // URL do webhook do n8n (substitua pela sua URL real)
@@ -242,6 +242,17 @@ chatInput.addEventListener('keypress', async function (e) {
     }
 });
 
+// Gere ou recupere um sessionId único para o usuário
+function getSessionId() {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+        // Gera um sessionId único (você pode usar uma biblioteca como uuid para algo mais robusto)
+        sessionId = 'user-' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+}
+
 // Função para enviar mensagem ao n8n e receber resposta
 async function sendMessageToN8n(userMessage) {
     try {
@@ -252,6 +263,7 @@ async function sendMessageToN8n(userMessage) {
             },
             body: JSON.stringify({ message: userMessage })
         });
+
         const data = await response.json();
         console.log("Resposta do n8n:", data);
         return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
