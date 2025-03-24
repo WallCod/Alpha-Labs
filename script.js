@@ -189,16 +189,18 @@ document.querySelector('#navToggle').addEventListener('click', function() {
         }
     });
 
-    // Chatbot Retrátil
+// Chatbot Retrátil
 const chatbotIcon = document.getElementById('chatbotIcon');
 const chatbotContent = document.getElementById('chatbotContent');
 const chatInput = document.getElementById('chatInput');
 const chatOutput = document.getElementById('chatOutput');
 
-// Estado do chatbot para lembrar o nome, contexto e categoria
+// Estado do chatbot para lembrar o nome e histórico
 let userName = '';
 let conversationHistory = [];
-let currentCategory = '';
+
+// URL do webhook do n8n (substitua pela sua URL real)
+const webhookUrl = 'https://n8n.alphalabs.lat/webhook/c6098f81-b4eb-4c83-8990-2cb52b819900/chat'; // Insira a URL do seu webhook aqui
 
 chatbotIcon.addEventListener('click', function () {
     chatbotContent.classList.toggle('hidden');
@@ -216,7 +218,7 @@ chatbotIcon.addEventListener('click', function () {
     }
 });
 
-chatInput.addEventListener('keypress', function (e) {
+chatInput.addEventListener('keypress', async function (e) {
     if (e.key === 'Enter' && chatInput.value.trim()) {
         const userMessage = chatInput.value.trim();
         conversationHistory.push({ user: true, text: userMessage });
@@ -225,144 +227,36 @@ chatInput.addEventListener('keypress', function (e) {
         chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
         chatOutput.scrollTop = chatOutput.scrollHeight;
 
-        // Processar mensagem e gerar resposta humanizada
-        setTimeout(() => {
-            let botResponse = generateBotResponse(userMessage);
+        // Enviar mensagem para o n8n e obter resposta do agente
+        try {
+            const botResponse = await sendMessageToN8n(userMessage);
             chatOutput.innerHTML += `<p class="chat-message bot"><strong>AlphaBot:</strong> ${botResponse}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
-        }, 1000); // Simula atraso humano (1 segundo)
+        } catch (error) {
+            console.error('Erro ao chamar o n8n:', error);
+            chatOutput.innerHTML += `<p class="chat-message bot"><strong>AlphaBot:</strong> Desculpe, algo deu errado. Tente novamente! 😅</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
 
         chatInput.value = '';
     }
 });
 
-function generateBotResponse(userMessage) {
-    const lowerMessage = userMessage.toLowerCase();
-    if (lowerMessage.length < 2) {
-        return `Hmm, mensagem muito curta, ${userName || 'amigo'}. Tente algo como 'Serviços', 'Suporte' ou 'Sobre Nós'. 😅`;
-    }
-    const lastUserMessage = conversationHistory[conversationHistory.length - 1]?.text.toLowerCase() || '';
+// Função para enviar mensagem ao n8n e receber resposta
+async function sendMessageToN8n(userMessage) {
+    const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessage }) // Envia a mensagem como JSON
+    });
 
-    // Tentar identificar o nome do usuário
-    if (!userName && lowerMessage.match(/meu nome é (.+)/i)) {
-        userName = lowerMessage.match(/meu nome é (.+)/i)[1];
-        return `Prazer em te conhecer, ${userName}! Como posso te ajudar hoje na Alpha Labs? 😊 Escolha uma opção: Produtos, Serviços, Suporte ou Sobre Nós.`;
-    }
-
-    // Respostas humanizadas e variadas por categorias
-    const responses = {
-        // Saudação inicial e genérica
-        'oi': [
-            `Olá, ${userName || 'amigo'}! Tudo bem? Eu sou o AlphaBot da Alpha Labs. Como posso te ajudar hoje? 😊 Escolha: Serviços, Suporte ou Sobre Nós.`,
-            `Oi, tudo certo por aí? Estou aqui pra te guiar pela Alpha Labs. O que te interessa? Serviços, Suporte ou Sobre Nós? 🚀`
-        ],
-        'olá': [
-            `E aí! Bem-vindo à Alpha Labs, ${userName || 'pessoa legal'}. O que você precisa? Serviços, Suporte ou Sobre Nós?`,
-            `Oi, prazer em te ver! Como posso te ajudar hoje? Escolha uma opção: Serviços, Suporte ou Sobre Nós. 😊`
-        ],
-
-        // Categorias principais
-        'software': [
-            `Nossos softwares são perfeitos para automação! Incluem relatórios em tempo real e integração com APIs 🚀. Quer saber mais sobre Preços, Funcionalidades ou Demos? Digite uma opção!`,
-            `Softwares da Alpha Labs: automação avançada, relatórios em tempo real, integração com APIs. O que te interessa? Preços, Funcionalidades ou Demos? 😊 Veja mais em <a href="/produtos/software">nossa página</a>.`
-        ],
-        'preços': [
-            `Nossos preços variam: Softwares a partir de  R$ 199,00/mês. Quer uma cotação personalizada? Envie um email para alphalabsia@gmail.com ou use o formulário no rodapé!`,
-            `Preços Alpha Labs: Softwares (R$ 199,90/mês). Quer mais detalhes? Email alphalabsia@gmail.com ou formulário no site. 😊`
-        ],
-        'funcionalidades': [
-            `Nossos softwares têm automação avançada, relatórios em tempo real e APIs integráveis. Quer saber sobre automação, relatórios ou APIs? Digite uma opção!`,
-            `Funcionalidades top: automação com 1 clique, relatórios dinâmicos, APIs personalizadas. O que te interessa? Automação, Relatórios ou APIs? 🚀 Veja mais em <a href="/produtos/software">aqui</a>.`
-        ],
-        'especificações': [
-            `Hardwares com processadores de última geração, até 32GB de RAM e SSD de 1TB. Quer detalhes sobre desempenho, memória ou armazenamento? Digite uma opção!`,
-            `Especificações incríveis: CPUs avançadas, 32GB RAM, SSD 1TB. O que te interessa? Desempenho, Memória ou Armazenamento? 😊 Confira em <a href="/produtos/hardware">aqui</a>.`
-        ],
-        'compatibilidade': [
-            `Nossos Softwares são compatíveis com Windows, macOS, Linux e APIs customizadas. Quer saber mais sobre sistemas, dispositivos ou integrações? Digite uma opção!`,
-            `Compatibilidade total: Windows, macOS, Linux, APIs customizadas. O que te interessa? Sistemas, Dispositivos ou Integrações? 😊 Veja em <a href="/produtos">aqui</a>.`
-        ],
-        'ofertas': [
-            `Temos promoções incríveis! Com 20% off e pacotes de software por R$ 199,90/mês. Quer saber mais? Email alphalabsia@gmail.com ou veja em <a href="/ofertas">nossas promoções</a>.`,
-            `Ofertas Alpha Labs: 20% off em  software a R$ 199,90/mês. Interessado? Contate-nos em alphalabsia@gmail.com ou veja em <a href="/ofertas">aqui</a> 😊`
-        ],
-        'serviços': [
-            `Na Alpha Labs, oferecemos Consultoria, Implementação e Suporte Técnico. Qual te interessa? Digite 'Consultoria', 'Implementação' ou 'Suporte Técnico'.`,
-            `Nossos serviços são tops: Consultoria, Implementação e Suporte Técnico. Quer saber mais sobre algum? Digite o nome! 😊`
-        ],
-        'consultoria': [
-            `Nossa consultoria ajuda a otimizar negócios com IA e automação. Quer saber sobre Custos, Resultados ou Agendamento? Digite uma opção!`,
-            `Consultoria Alpha Labs: IA e automação para crescer. O que te interessa? Custos, Resultados ou Agendamento? 😊 Veja em <a href="/servicos/consultoria">aqui</a>.`
-        ],
-        'consultoria de software': [
-            `Nossa Consultoria de Software ajuda a otimizar negócios com automação e IA. Quer saber sobre Custos, Resultados ou Agendamento? Digite uma opção!`,
-            `Consultoria de Software Alpha Labs: IA e automação para crescer. O que te interessa? Custos, Resultados ou Agendamento? 😊 Veja em <a href="/servicos/consultoria-software">aqui</a>.`
-        ],
-        'desenvolvimento de soluções': [
-            `Nosso Desenvolvimento de Soluções cria softwares sob medida para automação e análise. Quer saber sobre Preços, Funcionalidades ou Cronograma? Digite uma opção!`,
-            `Desenvolvimento de Soluções Alpha Labs: softwares personalizados para automação. O que te interessa? Preços, Funcionalidades ou Cronograma? 😊 Confira em <a href="/servicos/desenvolvimento-solucoes">aqui</a>.`
-        ],
-        'cronograma': [
-            `Nosso cronograma para Desenvolvimento de Soluções é de 2 a 8 semanas, dependendo do projeto. Quer saber sobre etapas, prazos ou revisões? Digite uma opção!`,
-            `Cronograma Alpha Labs: 2-8 semanas para soluções sob medida. O que te interessa? Etapas, Prazos ou Revisões? 😊 Confira em <a href="/servicos/desenvolvimento-solucoes">aqui</a>.`
-        ],
-        'processos': [
-            `Nosso processo de suporte inclui tickets, chat e follow-up. Quer saber sobre abertura de tickets, resolução ou acompanhamento? Digite uma opção!`,
-            `Processos Alpha Labs: tickets, chat, follow-up. O que te interessa? Abertura, Resolução ou Acompanhamento? 😊 Confira em <a href="/suporte">aqui</a>.`
-        ],
-        'implementação': [
-            `Oferecemos implementação rápida de software e . Quer saber sobre Preços, Tempo ou Suporte? Digite uma opção!`,
-            `Implementação Alpha Labs: rápida e eficiente. O que te interessa? Preços, Tempo ou Suporte? 😊 Confira em <a href="/servicos/implementacao">aqui</a>.`
-        ],
-        'suporte técnico': [
-            `Nosso suporte é 24/7, com tickets e chat. Quer saber sobre Horários, Processos ou Contato? Digite uma opção!`,
-            `Suporte Técnico Alpha Labs: 24/7, tickets e chat. O que te interessa? Horários, Processos ou Contato? 😊 Veja em <a href="/suporte">aqui</a>.`
-        ],
-        'suporte': [
-            `Aqui na Alpha Labs, nosso Suporte Técnico é 24/7. Quer saber sobre Horários, Tutoriais ou Contato? Digite uma opção!`,
-            `Suporte Alpha Labs: 24/7, com tutoriais e tickets. O que te interessa? Horários, Tutoriais ou Contato? 😊 Veja em <a href="/suporte">aqui</a>.`
-        ],
-        'sobre nós': [
-            `Somos a Alpha Labs, especialistas em IA, automação e inovação. Quer saber sobre Missão, Equipe ou História? Digite uma opção!`,
-            `Alpha Labs: IA e automação para o futuro! O que te interessa? Missão, Equipe ou História? 😊 Confira em <a href="/sobre">aqui</a>.`
-        ],
-        'missão': [
-            `Nossa missão é transformar negócios com IA e automação, garantindo crescimento sustentável. Quer saber mais sobre valores ou impactos? Digite uma opção!`,
-            `Missão Alpha Labs: IA para crescimento sustentável. O que te interessa? Valores ou Impactos? 😊 Veja em <a href="/sobre/missao">aqui</a>.`
-        ],
-        'equipe': [
-            `Nossa equipe é composta por experts em IA, engenheiros e designers. Quer saber sobre Especialidades, Carreira ou Contato? Digite uma opção!`,
-            `Equipe Alpha Labs: tops em IA e inovação. O que te interessa? Especialidades, Carreira ou Contato? 😊 Confira em <a href="/sobre/equipe">aqui</a>.`
-        ],
-        'história': [
-            `Fundada em 2020, a Alpha Labs cresceu com IA e automação. Quer saber sobre Início, Crescimento ou Projetos? Digite uma opção!`,
-            `História Alpha Labs: desde 2020, liderando com IA. O que te interessa? Início, Crescimento ou Projetos? 😊 Veja em <a href="/sobre/historia">aqui</a>.`
-        ],
-        'tchau': [
-            `Até logo, ${userName || 'amigo'}! Se precisar, é só me chamar de novo. 😊`,
-            `Tchau, ${userName || 'pessoa legal'}! Estou aqui quando você voltar. Boa sorte! 🚀`
-        ]
-    };
-
-    // Resposta padrão para mensagens não reconhecidas
-    if (!lowerMessage) {
-        return "Hmm, parece que não entendi. Pode explicar melhor ou me perguntar algo sobre a Alpha Labs? 😅";
-    }
-
-    // Verificar se a mensagem contém uma chave de resposta
-    for (let key in responses) {
-        if (lowerMessage.includes(key)) {
-            return responses[key][Math.floor(Math.random() * responses[key].length)];
-        }
-    }
-
-    // Resposta genérica humanizada para mensagens não mapeadas
-    const genericResponses = [
-        `Uau, interessante, ${userName || 'amigo'}! Pode me contar mais ou perguntar algo sobre Produtos, Serviços, Suporte ou Sobre Nós?`,
-        `Hmm, não sei bem como responder, mas estou aqui pra te guiar. O que você quer saber sobre a Alpha Labs? 😊`,
-        `Interessante! Quer saber mais sobre nossos, Serviços, Suporte ou Sobre Nós? Digite uma dessas opções! 🚀`
-    ];
-    return genericResponses[Math.floor(Math.random() * genericResponses.length)];
+    const data = await response.json();
+    // Adicione este console.log para depurar
+    console.log("Resposta do n8n:", data);
+    // O n8n deve retornar algo como { "reply": "resposta do agente" }
+    return data.reply || 'Desculpe, não consegui processar sua mensagem.';
 }
 
     // Modo Escuro
