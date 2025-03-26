@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let conversationHistory = [];
 
     // URL do webhook do n8n
-    const webhookUrl = 'https://n8n.alphalabs.lat/webhook/c6098f81-b4eb-4c83-8990-2cb52b819900/chat';
+    const webhookUrl = 'https://n8n.alphalabs.lat/webhook/d62dd6a8-2e8c-40a3-9cc0-b1062d705e55/chat';
 
     // Função para obter ou gerar um sessionId
     function getSessionId() {
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
             conversationHistory.push({ sender: 'bot', message: botReply });
         }
     });
-    
+
     // Abrir/fechar o chat
     chatbotIcon.addEventListener('click', () => {
         const isChatOpen = !chatbotContent.classList.contains('hidden');
