@@ -6,29 +6,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Scroll suave com ajuste para o cabeçalho fixo
-document.querySelectorAll('.nav-links a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            const headerHeight = document.querySelector('header').offsetHeight; // Pega a altura do cabeçalho
-            const targetPosition = targetElement.offsetTop - headerHeight; // Subtrai a altura do cabeçalho
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth' // Mantém a rolagem suave
-            });
-        }
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight; // Pega a altura do cabeçalho
+                const targetPosition = targetElement.offsetTop - headerHeight; // Subtrai a altura do cabeçalho
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth' // Mantém a rolagem suave
+                });
+            }
+        });
     });
-});
 
 
-//Menu Hamburguer
-document.querySelector('#navToggle').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('active');
-});
+    //Menu Hamburguer
+    document.querySelector('#navToggle').addEventListener('click', function () {
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
     // Abrir Modal de Demonstração
-    document.getElementById('demoBtn').addEventListener('click', function() {
+    document.getElementById('demoBtn').addEventListener('click', function () {
         const modal = document.getElementById('demoModal');
         modal.style.display = 'flex';
         modal.setAttribute('aria-hidden', 'false');
@@ -36,7 +36,7 @@ document.querySelector('#navToggle').addEventListener('click', function() {
     });
 
     // Fechar Modal
-    document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('closeModal').addEventListener('click', function () {
         const modal = document.getElementById('demoModal');
         modal.style.display = 'none';
         modal.setAttribute('aria-hidden', 'true');
@@ -44,7 +44,7 @@ document.querySelector('#navToggle').addEventListener('click', function() {
     });
 
     // Fechar Modal ao clicar fora
-    window.addEventListener('click', function(event) {
+    window.addEventListener('click', function (event) {
         const modal = document.getElementById('demoModal');
         if (event.target === modal) {
             modal.style.display = 'none';
@@ -54,7 +54,7 @@ document.querySelector('#navToggle').addEventListener('click', function() {
     });
 
     // Validar e Enviar Formulário de Demonstração
-    document.getElementById('demoForm').addEventListener('submit', async function(e) {
+    document.getElementById('demoForm').addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const name = document.getElementById('demoName').value.trim();
@@ -129,7 +129,7 @@ document.querySelector('#navToggle').addEventListener('click', function() {
     });
 
     // Validar e Enviar Formulário de Contato
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const name = document.getElementById('nome').value.trim();
@@ -190,136 +190,210 @@ document.querySelector('#navToggle').addEventListener('click', function() {
     });
 
 
-// Chatbot Retrátil
-const chatbotIcon = document.getElementById('chatbotIcon');
-const chatbotContent = document.getElementById('chatbotContent');
-const chatInput = document.getElementById('chatInput');
-const chatOutput = document.getElementById('chatOutput');
-const chatbotBubbles = document.querySelector('.chatbot-bubbles');
+    // Chatbot Retrátil
+    const chatbotIcon = document.getElementById('chatbotIcon');
+    const chatbotContent = document.getElementById('chatbotContent');
+    const chatInput = document.getElementById('chatInput');
+    const chatOutput = document.getElementById('chatOutput');
+    const chatbotBubbles = document.querySelector('.chatbot-bubbles');
 
-// Estado do chatbot para lembrar o nome e histórico
-let userName = '';
-let conversationHistory = [];
+    // Estado do chatbot para lembrar o nome e histórico
+    let userName = '';
+    let conversationHistory = [];
 
-// URL do webhook do n8n
-const webhookUrl = 'https://n8n.alphalabs.lat/webhook/c6098f81-b4eb-4c83-8990-2cb52b819900/chat';
+    // URL do webhook do n8n
+    const webhookUrl = 'https://n8n.alphalabs.lat/webhook/c6098f81-b4eb-4c83-8990-2cb52b819900/chat';
 
-// Função para obter ou gerar um sessionId
-function getSessionId() {
-    let sessionId = localStorage.getItem('sessionId');
-    if (!sessionId) {
-        sessionId = 'user-' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('sessionId', sessionId);
+    // Função para obter ou gerar um sessionId
+    function getSessionId() {
+        let sessionId = localStorage.getItem('sessionId');
+        if (!sessionId) {
+            sessionId = 'user-' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('sessionId', sessionId);
+        }
+        return sessionId;
     }
-    return sessionId;
-}
 
-// Função para enviar mensagem ao n8n
-async function sendMessageToN8n(userMessage) {
-    const sessionId = getSessionId();
-    try {
-        const response = await fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message: userMessage, sessionId: sessionId })
-        });
-        const data = await response.json();
-        console.log("Resposta do n8n:", data);
-        return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
-    } catch (error) {
-        console.error("Erro ao chamar o n8n:", error);
-        return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
+    // Função para enviar mensagem ao n8n
+    async function sendMessageToN8n(userMessage) {
+        const sessionId = getSessionId();
+        try {
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage, sessionId: sessionId })
+            });
+            const data = await response.json();
+            console.log("Resposta do n8n:", data);
+            return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
+        } catch (error) {
+            console.error("Erro ao chamar o n8n:", error);
+            return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
+        }
     }
-}
+    // Função para verificar palavras-chave e redirecionar
+    function handleUserMessage(userMessage) {
+        const messageLower = userMessage.toLowerCase();
 
-// Abrir/fechar o chat
-chatbotIcon.addEventListener('click', () => {
-    const isChatOpen = !chatbotContent.classList.contains('hidden');
-    if (isChatOpen) {
-        // Fecha o chat e mostra os balões
-        chatbotContent.classList.add('hidden');
-        chatbotBubbles.style.display = 'flex';
-    } else {
-        // Abre o chat e esconde os balões
-        chatbotContent.classList.remove('hidden');
-        chatbotBubbles.style.display = 'none';
-
-        // Saudação inicial se for a primeira abertura
-        if (conversationHistory.length === 0) {
-            const greeting = "Oi! Eu sou o Alpha, seu assistente da Alpha Labs. Como posso te ajudar hoje? 😊";
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${greeting}</p>`;
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-            conversationHistory.push({ sender: 'bot', message: greeting });
+        // Captura o nome do usuário
+        if (messageLower.includes('meu nome é') || messageLower.includes('meu nome eh')) {
+            const nameMatch = userMessage.match(/(?:meu nome é|meu nome eh)\s+([a-zA-Z]+)/i);
+            if (nameMatch && nameMatch[1]) {
+                userName = nameMatch[1];
+                return `Prazer em conhecê-lo, ${userName}! Como posso ajudar você hoje?`;
+            }
         }
 
-        // Foca no input
-        chatInput.focus();
+        // Usa o nome do usuário em respostas, se disponível
+        const greeting = userName ? `${userName}, ` : '';
+
+        // Palavras-chave para redirecionamento
+        if (messageLower.includes('contato') || messageLower.includes('fale comigo')) {
+            return `${greeting}Você quer entrar em contato? Clique aqui: <a href="/#contato" target="_blank">Página de Contato</a>`;
+        } else if (messageLower.includes('serviços') || messageLower.includes('o que você faz')) {
+            return `${greeting}Conheça nossos serviços! Clique aqui: <a href="/#servicos" target="_blank">Nossos Serviços</a>`;
+        } else if (messageLower.includes('sobre') || messageLower.includes('quem somos')) {
+            return `${greeting}Saiba mais sobre nós! Clique aqui: <a href="/#sobre" target="_blank">Sobre Nós</a>`;
+        } else if (messageLower.includes('whatsapp') || messageLower.includes('falar no whatsapp')) {
+            const whatsappNumber = '73981597856'; // Substitua pelo número real
+            const whatsappMessage = encodeURIComponent('Olá, gostaria de falar sobre seus serviços!');
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            return `${greeting}Vamos conversar pelo WhatsApp? Clique aqui: <a href="${whatsappLink}" target="_blank">Falar no WhatsApp</a>`;
+        }
+
+        // Se não houver palavras-chave, envia a mensagem ao n8n
+        return null;
     }
 
-    // Atualiza atributos de acessibilidade
-    const isOpen = !chatbotContent.classList.contains('hidden');
-    chatbotContent.setAttribute('aria-hidden', !isOpen);
-    chatbotIcon.setAttribute('aria-expanded', isOpen);
-});
+    // Enviar mensagem ao pressionar Enter
+    chatInput.addEventListener('keypress', async (e) => {
+        if (e.key === 'Enter') {
+            const userMessage = chatInput.value.trim();
+            if (userMessage === '') return;
 
-// Enviar mensagem ao pressionar Enter
-chatInput.addEventListener('keypress', async (e) => {
-    if (e.key === 'Enter') {
-        const userMessage = chatInput.value.trim();
-        if (userMessage === '') return;
+            // Adiciona a mensagem do usuário ao chat
+            chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+            conversationHistory.push({ sender: 'user', message: userMessage });
 
-        // Adiciona a mensagem do usuário ao chat
-        chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
-        chatOutput.scrollTop = chatOutput.scrollHeight;
-        conversationHistory.push({ sender: 'user', message: userMessage });
+            // Limpa o input
+            chatInput.value = '';
 
-        // Limpa o input
-        chatInput.value = '';
+            // Mostra o indicador de "digitando..."
+            const typingIndicator = document.createElement('p');
+            typingIndicator.className = 'chat-message bot typing';
+            typingIndicator.innerHTML = '<strong>Alpha:</strong> Digitando...';
+            chatOutput.appendChild(typingIndicator);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
 
-        // Envia a mensagem ao n8n e exibe a resposta
-        const botReply = await sendMessageToN8n(userMessage);
-        chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botReply}</p>`;
-        chatOutput.scrollTop = chatOutput.scrollHeight;
-        conversationHistory.push({ sender: 'bot', message: botReply });
+            // Verifica palavras-chave para redirecionamento
+            const localReply = handleUserMessage(userMessage);
+            let botReply;
+
+            if (localReply) {
+                botReply = localReply;
+            } else {
+                // Envia a mensagem ao n8n e exibe a resposta
+                botReply = await sendMessageToN8n(userMessage);
+            }
+            // Remove o indicador de "digitando..."
+            typingIndicator.remove();
+
+            // Exibe a resposta do bot
+            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botReply}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+            conversationHistory.push({ sender: 'bot', message: botReply });
+        }
+    });
+    
+    // Abrir/fechar o chat
+    chatbotIcon.addEventListener('click', () => {
+        const isChatOpen = !chatbotContent.classList.contains('hidden');
+        if (isChatOpen) {
+            // Fecha o chat e mostra os balões
+            chatbotContent.classList.add('hidden');
+            chatbotBubbles.style.display = 'flex';
+        } else {
+            // Abre o chat e esconde os balões
+            chatbotContent.classList.remove('hidden');
+            chatbotBubbles.style.display = 'none';
+
+            // Saudação inicial se for a primeira abertura
+            if (conversationHistory.length === 0) {
+                const greeting = "Oi! Eu sou o Alpha, seu assistente da Alpha Labs. Como posso te ajudar hoje? 😊";
+                chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${greeting}</p>`;
+                chatOutput.scrollTop = chatOutput.scrollHeight;
+                conversationHistory.push({ sender: 'bot', message: greeting });
+            }
+
+            // Foca no input
+            chatInput.focus();
+        }
+
+        // Atualiza atributos de acessibilidade
+        const isOpen = !chatbotContent.classList.contains('hidden');
+        chatbotContent.setAttribute('aria-hidden', !isOpen);
+        chatbotIcon.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Enviar mensagem ao pressionar Enter
+    chatInput.addEventListener('keypress', async (e) => {
+        if (e.key === 'Enter') {
+            const userMessage = chatInput.value.trim();
+            if (userMessage === '') return;
+
+            // Adiciona a mensagem do usuário ao chat
+            chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+            conversationHistory.push({ sender: 'user', message: userMessage });
+
+            // Limpa o input
+            chatInput.value = '';
+
+            // Envia a mensagem ao n8n e exibe a resposta
+            const botReply = await sendMessageToN8n(userMessage);
+            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botReply}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+            conversationHistory.push({ sender: 'bot', message: botReply });
+        }
+    });
+
+    // Gere ou recupere um sessionId único para o usuário
+    function getSessionId() {
+        let sessionId = localStorage.getItem('sessionId');
+        if (!sessionId) {
+            // Gera um sessionId único (você pode usar uma biblioteca como uuid para algo mais robusto)
+            sessionId = 'user-' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('sessionId', sessionId);
+        }
+        return sessionId;
     }
-});
 
-// Gere ou recupere um sessionId único para o usuário
-function getSessionId() {
-    let sessionId = localStorage.getItem('sessionId');
-    if (!sessionId) {
-        // Gera um sessionId único (você pode usar uma biblioteca como uuid para algo mais robusto)
-        sessionId = 'user-' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('sessionId', sessionId);
+    // Função para enviar mensagem ao n8n e receber resposta
+    async function sendMessageToN8n(userMessage) {
+        try {
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage })
+            });
+
+            const data = await response.json();
+            console.log("Resposta do n8n:", data);
+            return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
+        } catch (error) {
+            console.error("Erro ao chamar o n8n:", error);
+            return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
+        }
     }
-    return sessionId;
-}
-
-// Função para enviar mensagem ao n8n e receber resposta
-async function sendMessageToN8n(userMessage) {
-    try {
-        const response = await fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message: userMessage })
-        });
-
-        const data = await response.json();
-        console.log("Resposta do n8n:", data);
-        return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
-    } catch (error) {
-        console.error("Erro ao chamar o n8n:", error);
-        return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
-    }
-}
 
 
     // Modo Escuro
-    document.getElementById('themeToggle').addEventListener('click', function() {
+    document.getElementById('themeToggle').addEventListener('click', function () {
         document.body.classList.toggle('dark');
         const isDark = document.body.classList.contains('dark');
         this.textContent = isDark ? '☀️' : '🌙';
@@ -334,7 +408,7 @@ async function sendMessageToN8n(userMessage) {
     }
 
     // Inicializar Carrossel (Owl Carousel)
-    $(document).ready(function() {
+    $(document).ready(function () {
         try {
             $(".owl-carousel").owlCarousel({
                 loop: true,
@@ -396,13 +470,13 @@ async function sendMessageToN8n(userMessage) {
     });
 
     // Fechar Pop-ups ao clicar no botão "Fechar"
-    document.getElementById('closePopup').addEventListener('click', function() {
+    document.getElementById('closePopup').addEventListener('click', function () {
         const successPopup = document.getElementById('successPopup');
         successPopup.classList.add('hidden');
         successPopup.style.display = 'none';
     });
 
-    document.getElementById('closeDemoPopup').addEventListener('click', function() {
+    document.getElementById('closeDemoPopup').addEventListener('click', function () {
         const demoSuccessPopup = document.getElementById('demoSuccessPopup');
         demoSuccessPopup.classList.add('hidden');
         demoSuccessPopup.style.display = 'none';
