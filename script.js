@@ -256,7 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return `${greeting}Conheça nossos serviços! Clique aqui: <a href="/#servicos" target="_blank">Nossos Serviços</a>`;
         } else if (messageLower.includes('sobre') || messageLower.includes('quem somos')) {
             return `${greeting}Saiba mais sobre nós! Clique aqui: <a href="/#sobre" target="_blank">Sobre Nós</a>`;
-        } else if (messageLower.includes('whatsapp') || messageLower.includes('falar no whatsapp')) {
+        } else if (messageLower.includes('whatsapp') || 
+            messageLower.includes('zap') || 
+            messageLower.includes('whats') || 
+            messageLower.includes('zapzap') || 
+            messageLower.includes('wpp') || 
+            messageLower.includes('falar no whatsapp')) {
             const whatsappNumber = '73981597856'; // Substitua pelo número real
             const whatsappMessage = encodeURIComponent('Olá, gostaria de falar sobre seus serviços!');
             const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
@@ -267,18 +272,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    // Enviar mensagem ao pressionar Enter
+    // Enviar mensagem ao pressionar Enter 1
     chatInput.addEventListener('keypress', async (e) => {
         if (e.key === 'Enter') {
             const userMessage = chatInput.value.trim();
             if (userMessage === '') return;
 
-            // Adiciona a mensagem do usuário ao chat
+            // Adiciona a mensagem do usuário ao chat 1
             chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
             conversationHistory.push({ sender: 'user', message: userMessage });
 
-            // Limpa o input
+            // Limpa o input 1
             chatInput.value = '';
 
             // Mostra o indicador de "digitando..."
@@ -305,6 +310,14 @@ document.addEventListener('DOMContentLoaded', () => {
             chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botReply}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
             conversationHistory.push({ sender: 'bot', message: botReply });
+
+            // Atraso depois do envio do link whatsapp
+            if (botReply && botReply.includes('https://wa.me/')) {
+                setTimeout(() => {
+                    chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> Enviei o link do WhatsApp para você! Conseguiu abrir direitinho? 😊 Se precisar de mais alguma coisa, é só me avisar!</p>`;
+                    chatOutput.scrollTop = chatOutput.scrollHeight;
+                }, 5000);
+            }
         }
     });
 
@@ -336,28 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = !chatbotContent.classList.contains('hidden');
         chatbotContent.setAttribute('aria-hidden', !isOpen);
         chatbotIcon.setAttribute('aria-expanded', isOpen);
-    });
-
-    // Enviar mensagem ao pressionar Enter
-    chatInput.addEventListener('keypress', async (e) => {
-        if (e.key === 'Enter') {
-            const userMessage = chatInput.value.trim();
-            if (userMessage === '') return;
-
-            // Adiciona a mensagem do usuário ao chat
-            chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-            conversationHistory.push({ sender: 'user', message: userMessage });
-
-            // Limpa o input
-            chatInput.value = '';
-
-            // Envia a mensagem ao n8n e exibe a resposta
-            const botReply = await sendMessageToN8n(userMessage);
-            chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${botReply}</p>`;
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-            conversationHistory.push({ sender: 'bot', message: botReply });
-        }
     });
 
     // Gere ou recupere um sessionId único para o usuário
