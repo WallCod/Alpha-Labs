@@ -391,6 +391,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Verifica se os balões já foram fechados
+if (localStorage.getItem('bubblesClosed') === 'true') {
+    document.querySelectorAll('.bubble').forEach(bubble => {
+        bubble.classList.add('hidden');
+    });
+    document.querySelector('.close-bubbles').style.display = 'none';
+}
+
+// Função para garantir que os balões e o botão "X" reapareçam ao carregar a página
+window.addEventListener('load', () => {
+    // Seleciona todos os balões
+    const bubbles = document.querySelectorAll('.bubble');
+    // Remove a classe "hidden" de todos os balões
+    bubbles.forEach(bubble => {
+        bubble.classList.remove('hidden');
+    });
+    // Mostra o botão "X"
+    const closeBubblesBtn = document.querySelector('.close-bubbles');
+    closeBubblesBtn.style.display = 'flex'; // Usa "flex" para manter o display original (definido no CSS)
+});
+
+// Seleciona o botão "X"
+const closeBubblesBtn = document.querySelector('.close-bubbles');
+
+// Seleciona todos os balões
+const bubbles = document.querySelectorAll('.bubble');
+
+// Adiciona o evento de clique ao botão "X"
+closeBubblesBtn.addEventListener('click', () => {
+    // Esconde todos os balões e o botão "X"
+    bubbles.forEach(bubble => {
+        bubble.classList.add('hidden');
+    });
+    closeBubblesBtn.style.display = 'none';
+});
 
     // Modo Escuro
     document.getElementById('themeToggle').addEventListener('click', function () {

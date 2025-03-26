@@ -780,6 +780,54 @@ body.dark .form-group textarea {
     }
 }
 
+/* Estilo do botão "X" */
+.close-bubbles {
+    position: absolute;
+    top: -25px; /* Posiciona o "X" acima do primeiro balão */
+    right: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Aumenta o tamanho do "X" */
+    font-weight: bold;
+    color: #666; /* Cor mais escura para melhor contraste */
+    background-color: #fff;
+    border-radius: 50%;
+    width: 20px; /* Aumenta o tamanho do botão */
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    z-index: 1001;
+}
+
+.close-bubbles:hover {
+    transform: scale(1.2); /* Aumenta o botão ao passar o mouse */
+    color: #ff0000; /* Muda a cor do "X" para vermelho */
+    background-color: #f8f8f8; /* Leve mudança no fundo */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
+}
+
+/* Responsividade do botão "X" */
+@media (max-width: 768px) {
+    .close-bubbles {
+        font-size: 12px;
+        width: 18px;
+        height: 18px;
+        top: -20px; /* Ajusta a posição para telas menores */
+        right: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .close-bubbles {
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+        top: -18px; /* Ajusta a posição para telas ainda menores */
+        right: 2px;
+    }
+}
 
 /* Chatbot - Estilos com máxima especificidade e depuração */
 #chatbot {
