@@ -961,6 +961,7 @@ body.dark #chatbot .chat-message.bot {
     color: #0056b3;
 }
 
+
 /* Responsividade do Chatbot */
 @media (max-width: 768px) {
     #chatbot {
