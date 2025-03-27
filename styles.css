@@ -951,6 +951,16 @@ body.dark #chatbot .chat-message.bot {
     outline: none !important;
 }
 
+/* Feedback Visual para Links */
+.chat-message a {
+    color: #007bff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.chat-message a:hover {
+    color: #0056b3;
+}
+
 /* Responsividade do Chatbot */
 @media (max-width: 768px) {
     #chatbot {
