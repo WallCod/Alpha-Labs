@@ -43,12 +43,18 @@ Bem-vindo ao **Alpha Labs**, uma plataforma de ponta especializada em automaçã
 ---
 
 ## 📜 Licença
-Este projeto está licenciado sob a Licença MIT — veja o arquivo `LICENSE` para detalhes.
+Este projeto está licenciado sob a Licença All Right Reserved — veja o arquivo `LICENSE` para detalhes.
+- © 2025
+- 🦁
+- [Wallax Figueiredo](https://www.linkedin.com/in/wallax-figueiredo-41116b285/).
+-  Todos os direitos reservados.  
+Este código é disponibilizado apenas para visualização como parte do meu portfólio. É estritamente proibido copiar, modificar, distribuir ou usar este código para qualquer finalidade sem autorização expressa por escrito.
 
 ---
 
 ## 💡 Suporte
-Se você tiver problemas ou dúvidas, abra uma *issue* no GitHub ou entre em contato com nossa equipe em `suport@alphalabs.lat`. Junte-se à nossa jornada e transforme negociações com Alpha Labs!
+Se você tiver problemas ou dúvidas, abra uma *issue* no GitHub ou entre em contato com nossa equipe em `suport@alphalabs.lat` ou `alphalabsia@gmail.com`.
+ Junte-se à nossa jornada e transforme negociações com Alpha Labs!
 
 ---
 
@@ -98,7 +104,14 @@ Welcome to **Alpha Labs**, a cutting-edge platform specializing in AI-based auto
 ---
 
 ## 📜 License
-This project is licensed under the MIT License — see the `LICENSE` file for details.
+This project is licensed under the All Rights Reserved License — see the `LICENSE` file for details.
+
+- © 2025
+- 🦁
+- [Wallax Figueiredo](https://www.linkedin.com/in/wallax-figueiredo-41116b285/).
+- All rights reserved.
+This code is made available only for viewing as part of my portfolio. It is strictly forbidden to copy, modify, distribute, or use this code for any purpose without express written authorization.
+
 
 ---
 
