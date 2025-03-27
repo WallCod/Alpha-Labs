@@ -200,6 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Estado do chatbot para lembrar o nome e histórico
     let userName = '';
     let conversationHistory = [];
+    userName = localStorage.getItem('userName') || '';
+    conversationHistory = JSON.parse(localStorage.getItem('conversationHistory')) || [];
 
     // URL do webhook do n8n
     const webhookUrl = 'https://n8n.alphalabs.lat/webhook/d62dd6a8-2e8c-40a3-9cc0-b1062d705e55/chat';
@@ -223,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: userMessage, sessionId: sessionId })
+                body: JSON.stringify({ message: userMessage, sessionId: sessionId, history: conversationHistory })
             });
             const data = await response.json();
             console.log("Resposta do n8n:", data);
@@ -242,12 +244,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const nameMatch = userMessage.match(/(?:meu nome é|meu nome eh)\s+([a-zA-Z]+)/i);
             if (nameMatch && nameMatch[1]) {
                 userName = nameMatch[1];
+                localStorage.setItem('userName', userName);
                 return `Prazer em conhecê-lo, ${userName}! Como posso ajudar você hoje?`;
             }
         }
 
         // Usa o nome do usuário em respostas, se disponível
         const greeting = userName ? `${userName}, ` : '';
+
+        // Verifica se o usuário perguntou pelo nome
+        if (messageLower.includes('qual é o meu nome') || messageLower.includes('qual o meu nome')) {
+            if (userName) {
+                return `${greeting}Seu nome é ${userName}, né? 😊 Como posso te ajudar agora?`;
+            } else {
+                return `Eu não sei o seu nome ainda! 😅 Pode me dizer o seu nome?`;
+            }
+        }
 
         // Palavras-chave para redirecionamento
         if (messageLower.includes('contato') || messageLower.includes('fale comigo')) {
@@ -256,11 +268,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return `${greeting}Conheça nossos serviços! Clique aqui: <a href="/#servicos" target="_blank">Nossos Serviços</a>`;
         } else if (messageLower.includes('sobre') || messageLower.includes('quem somos')) {
             return `${greeting}Saiba mais sobre nós! Clique aqui: <a href="/#sobre" target="_blank">Sobre Nós</a>`;
-        } else if (messageLower.includes('whatsapp') || 
-            messageLower.includes('zap') || 
-            messageLower.includes('whats') || 
-            messageLower.includes('zapzap') || 
-            messageLower.includes('wpp') || 
+        } else if (messageLower.includes('whatsapp') ||
+            messageLower.includes('zap') ||
+            messageLower.includes('whats') ||
+            messageLower.includes('zapzap') ||
+            messageLower.includes('wpp') ||
             messageLower.includes('falar no whatsapp')) {
             const whatsappNumber = '73981597856'; // Substitua pelo número real
             const whatsappMessage = encodeURIComponent('Olá, gostaria de falar sobre seus serviços!');
@@ -272,18 +284,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    // Enviar mensagem ao pressionar Enter 1
+    // Enviar mensagem ao pressionar Enter 
     chatInput.addEventListener('keypress', async (e) => {
         if (e.key === 'Enter') {
             const userMessage = chatInput.value.trim();
             if (userMessage === '') return;
 
-            // Adiciona a mensagem do usuário ao chat 1
+            // Adiciona a mensagem do usuário ao chat 
             chatOutput.innerHTML += `<p class="chat-message user"><strong>Você:</strong> ${userMessage}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
+            localStorage.setItem('conversationHistory', JSON.stringify(conversationHistory));
             conversationHistory.push({ sender: 'user', message: userMessage });
 
-            // Limpa o input 1
+            // Limpa o input 
             chatInput.value = '';
 
             // Mostra o indicador de "digitando..."
@@ -339,6 +352,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 chatOutput.innerHTML += `<p class="chat-message bot"><strong>Alpha:</strong> ${greeting}</p>`;
                 chatOutput.scrollTop = chatOutput.scrollHeight;
                 conversationHistory.push({ sender: 'bot', message: greeting });
+                localStorage.setItem('conversationHistory', JSON.stringify(conversationHistory));
+            } else {
+                // Carrega o histórico existente
+                conversationHistory.forEach(msg => {
+                    const senderClass = msg.sender === 'user' ? 'user' : 'bot';
+                    const senderLabel = msg.sender === 'user' ? 'Você' : 'Alpha';
+                    chatOutput.innerHTML += `<p class="chat-message ${senderClass}"><strong>${senderLabel}:</strong> ${msg.message}</p>`;
+                });
+                chatOutput.scrollTop = chatOutput.scrollHeight;
             }
 
             // Foca no input
@@ -362,61 +384,41 @@ document.addEventListener('DOMContentLoaded', () => {
         return sessionId;
     }
 
-    // Função para enviar mensagem ao n8n e receber resposta
-    async function sendMessageToN8n(userMessage) {
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: userMessage })
-            });
-
-            const data = await response.json();
-            console.log("Resposta do n8n:", data);
-            return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
-        } catch (error) {
-            console.error("Erro ao chamar o n8n:", error);
-            return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
-        }
+    // Verifica se os balões já foram fechados
+    if (localStorage.getItem('bubblesClosed') === 'true') {
+        document.querySelectorAll('.bubble').forEach(bubble => {
+            bubble.classList.add('hidden');
+        });
+        document.querySelector('.close-bubbles').style.display = 'none';
     }
 
-    // Verifica se os balões já foram fechados
-if (localStorage.getItem('bubblesClosed') === 'true') {
-    document.querySelectorAll('.bubble').forEach(bubble => {
-        bubble.classList.add('hidden');
+    // Função para garantir que os balões e o botão "X" reapareçam ao carregar a página
+    window.addEventListener('load', () => {
+        // Seleciona todos os balões
+        const bubbles = document.querySelectorAll('.bubble');
+        // Remove a classe "hidden" de todos os balões
+        bubbles.forEach(bubble => {
+            bubble.classList.remove('hidden');
+        });
+        // Mostra o botão "X"
+        const closeBubblesBtn = document.querySelector('.close-bubbles');
+        closeBubblesBtn.style.display = 'flex'; // Usa "flex" para manter o display original (definido no CSS)
     });
-    document.querySelector('.close-bubbles').style.display = 'none';
-}
 
-// Função para garantir que os balões e o botão "X" reapareçam ao carregar a página
-window.addEventListener('load', () => {
+    // Seleciona o botão "X"
+    const closeBubblesBtn = document.querySelector('.close-bubbles');
+
     // Seleciona todos os balões
     const bubbles = document.querySelectorAll('.bubble');
-    // Remove a classe "hidden" de todos os balões
-    bubbles.forEach(bubble => {
-        bubble.classList.remove('hidden');
+
+    // Adiciona o evento de clique ao botão "X"
+    closeBubblesBtn.addEventListener('click', () => {
+        // Esconde todos os balões e o botão "X"
+        bubbles.forEach(bubble => {
+            bubble.classList.add('hidden');
+        });
+        closeBubblesBtn.style.display = 'none';
     });
-    // Mostra o botão "X"
-    const closeBubblesBtn = document.querySelector('.close-bubbles');
-    closeBubblesBtn.style.display = 'flex'; // Usa "flex" para manter o display original (definido no CSS)
-});
-
-// Seleciona o botão "X"
-const closeBubblesBtn = document.querySelector('.close-bubbles');
-
-// Seleciona todos os balões
-const bubbles = document.querySelectorAll('.bubble');
-
-// Adiciona o evento de clique ao botão "X"
-closeBubblesBtn.addEventListener('click', () => {
-    // Esconde todos os balões e o botão "X"
-    bubbles.forEach(bubble => {
-        bubble.classList.add('hidden');
-    });
-    closeBubblesBtn.style.display = 'none';
-});
 
     // Modo Escuro
     document.getElementById('themeToggle').addEventListener('click', function () {
