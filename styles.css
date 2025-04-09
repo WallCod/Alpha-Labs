@@ -2075,6 +2075,17 @@ form button:hover {
     text-decoration: underline;
 }
 
+.powered .dev-emoji {
+    font-size: 14px; /* Tamanho do emoji */
+    display: inline-block; /* Necessário para transform */
+    transition: transform 0.3s ease, color 0.3s ease; /* Transição suave */
+    vertical-align: middle; /* Alinha com o texto */
+}
+
+.powered .dev-emoji:hover {
+    transform: scale(1.2); /* Aumenta o emoji */
+    color: #ffd700; /* Muda a cor do emoji */
+}
 /* Estilização personalizada para o banner de cookies */
 .cc-window {
     font-family: "DM Sans", sans-serif;
