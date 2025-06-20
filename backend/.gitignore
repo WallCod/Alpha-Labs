@@ -2,3 +2,7 @@
 .env
 
 node_modules
+
+.Procfile
+/Procfile
+Procfile
