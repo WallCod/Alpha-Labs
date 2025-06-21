@@ -159,7 +159,7 @@ app.post('/api/agendar-demo', async (req, res) => {
         try {
             const emailInfo = await transporter.sendMail({
                 from: `Alpha Labs <${process.env.EMAIL_USER}>`,
-                to: process.env.EMAIL_TO || 'seu-email-aqui',
+                to: process.env.EMAIL_TO || 'alphalabsia@gmail.com',
                 subject: 'Nova Solicitação de Demonstração',
                 text: `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}\nData/Hora: ${parsedDate.toLocaleString()}\nComentários: ${message || 'Nenhum'}`
             });
@@ -177,7 +177,7 @@ app.post('/api/agendar-demo', async (req, res) => {
                 await new Promise(resolve => setTimeout(resolve, 2000)); // Espera 2 segundos
                 const emailInfoRetry = await transporter.sendMail({
                     from: `Alpha Labs <${process.env.EMAIL_USER}>`,
-                    to: process.env.EMAIL_TO || 'seu-email-aqui',
+                    to: process.env.EMAIL_TO || 'alphalabsia@gmail.com',
                     subject: 'Nova Solicitação de Demonstração (Tentativa de Reenvio)',
                     text: `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}\nData/Hora: ${parsedDate.toLocaleString()}\nComentários: ${message || 'Nenhum'}\n(Tentativa de reenvio devido a erro inicial)`
                 });
@@ -225,7 +225,7 @@ app.post('/api/contato', async (req, res) => {
         // Enviar email de notificação
         await transporter.sendMail({
             from: `Alpha Labs <${process.env.EMAIL_USER}>`,
-            to: process.env.EMAIL_TO || 'seu-email-aqui',
+            to: process.env.EMAIL_TO || 'alphalabsia@gmail.com',
             subject: 'Nova Mensagem de Contato',
             text: `Nome: ${name}\nEmail: ${email}\nMensagem: ${message}`
         });
@@ -242,3 +242,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
